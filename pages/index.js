@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Layout, { siteTitle } from '../components/layout'
-import utilStyles from '../styles/utils.module.css'
+import utilStyles from '../styles/utils.module.scss'
+import styles from '../styles/Home.module.scss'
 import { getSortedPostsData } from '../lib/posts'
 import Link from 'next/link'
 import Date from '../components/date'
@@ -12,13 +13,58 @@ export async function getStaticProps() {
     },
   }
 }
+const logo = '/images/main-logo.png'
 export default function Home({ allPostsData }) {
   return (
     <Layout home>
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <section className={utilStyles.headingMd}>
+      <main className='main-home'>
+        <img
+          fetchpriority='high'
+          rel='preload'
+          className={styles['home-logo-img']}
+          src={logo}
+          alt='Wealth Health Logo'
+          width='200'
+          height='200'
+        />
+        <div className='main-nav light-colors'>
+          <div className='nav-container'>
+            {true ? (
+              <>
+                <Link
+                  href='login'
+                  className={utilStyles['btn']}
+                  // onClick={() => dispatch(logingError(''))}
+                  // state={{ loginAction: 'login' }}
+                >
+                  Employee list
+                </Link>
+                <Link
+                  href='signup'
+                  className={utilStyles['btn']}
+                  // state={{ loginAction: 'signup' }}
+                >
+                  Create employee
+                </Link>
+              </>
+            ) : (
+              <>
+                <MainMenu
+                  isCreate={false}
+                  isHome={true}
+                  isUserList={false}
+                  isView={false}
+                  isLight={true}
+                />
+              </>
+            )}
+          </div>
+        </div>
+      </main>
+      {/* <section className={utilStyles.headingMd}>
         <p>Je suis consultant en systèmes d’information et développeur.</p>
         <p>
           J’aide les TPE/PME à être plus efficaces dans l’utilisation de leurs
@@ -60,7 +106,7 @@ export default function Home({ allPostsData }) {
             </li>
           ))}
         </ul>
-      </section>
+      </section> */}
     </Layout>
   )
 }

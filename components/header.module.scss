@@ -1,0 +1,62 @@
+@import '../styles/colors.modules.scss';
+
+// Navigation in header
+.main-nav {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+  margin: 1rem 1rem;
+  padding: 1rem 0;
+  background-color: $bg-color-light;
+  // border-bottom: 2px solid $primary-color;
+
+  .logo {
+    // display: flex;
+    // height: 100%;
+    background: $bg-color-xlight;
+    aspect-ratio: 1/1;
+    width: 100px;
+    height: 100px;
+    align-items: center;
+    border-radius: 25% 2% 25% 2%;
+    // picture {
+    //   aspect-ratio: 1/1;
+    //   width: 100px;
+    //   height: 100px;
+    // }
+  }
+
+  .nav-container {
+    display: flex;
+    flex-direction: row;
+    align-self: stretch;
+    justify-content: space-between;
+    // width: 99%;
+    // place-self: flex-start;
+    // flex-direction: column;
+    // justify-content: space-between;
+    .menu-container {
+      display: flex;
+      flex-direction: row;
+      // width: 100%;
+      justify-content: flex-end;
+    }
+  }
+
+  .column {
+    flex-direction: column;
+    width: 100%;
+    // align-self: stretch;
+    // padding: 0;
+    // border: 0;
+  }
+
+  // .profile-link {
+  //   color: $primary-color;
+  // }
+
+  .right-space {
+    padding: 0 2.2em 0 0;
+  }
+}
