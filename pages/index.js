@@ -1,10 +1,10 @@
 import Head from 'next/head'
 import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.scss'
-import styles from '../styles/Home.module.scss'
+// import styles from '../styles/Home.module.scss'
 import { getSortedPostsData } from '../lib/posts'
 import Link from 'next/link'
-import Date from '../components/date'
+
 export async function getStaticProps() {
   const allPostsData = getSortedPostsData()
   return {
@@ -16,54 +16,56 @@ export async function getStaticProps() {
 const logo = '/images/main-logo.png'
 export default function Home({ allPostsData }) {
   return (
-    <Layout home>
+    <Layout home={true}>
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <main className='main-home'>
+      <section className='flex flex-col gap-10'>
         <img
           fetchpriority='high'
           rel='preload'
-          className={styles['home-logo-img']}
+          // className='place-self-center shadow-2xl my-4 rounded-tl-[25%] rounded-br-[25%]'
+          className={utilStyles['home-logo-img']}
           src={logo}
           alt='Wealth Health Logo'
           width='200'
           height='200'
         />
-        <div className='main-nav light-colors'>
-          <div className='nav-container'>
-            {true ? (
-              <>
-                <Link
-                  href='login'
-                  className={utilStyles['btn']}
-                  // onClick={() => dispatch(logingError(''))}
-                  // state={{ loginAction: 'login' }}
-                >
-                  Employee list
-                </Link>
-                <Link
-                  href='signup'
-                  className={utilStyles['btn']}
-                  // state={{ loginAction: 'signup' }}
-                >
-                  Create employee
-                </Link>
-              </>
-            ) : (
-              <>
-                <MainMenu
+        {/* <div className='main-nav light-colors'> */}
+        <div className='flex flex-row place-content-center gap-8'>
+          {/* <div className='nav-container'> */}
+          {true ? (
+            <>
+              <Link
+                href='listEmployees'
+                className={utilStyles['btn']}
+                // onClick={() => dispatch(logingError(''))}
+                // state={{ loginAction: 'login' }}
+              >
+                Employee list
+              </Link>
+              <Link
+                href='createEmployee'
+                className={utilStyles['btn']}
+                // state={{ loginAction: 'signup' }}
+              >
+                Create employee
+              </Link>
+            </>
+          ) : (
+            <>
+              {/* <MainMenu
                   isCreate={false}
                   isHome={true}
                   isUserList={false}
                   isView={false}
                   isLight={true}
-                />
-              </>
-            )}
-          </div>
+                /> */}
+            </>
+          )}
         </div>
-      </main>
+        {/* </div> */}
+      </section>
       {/* <section className={utilStyles.headingMd}>
         <p>Je suis consultant en systèmes d’information et développeur.</p>
         <p>

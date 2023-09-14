@@ -1,20 +1,24 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import styles from './layout.module.scss'
+
 import utilStyles from '../styles/utils.module.scss'
-import Link from 'next/link'
+
 import Header from './header'
 import Footer from './footer'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import { config } from '@fortawesome/fontawesome-svg-core'
+import { useRouter } from 'next/router'
 config.autoAddCss = false
 
 const name = 'Pierre-Yves Léglise'
 export const siteTitle = 'HR-Net - Employee database manager'
 
 export default function Layout({ children, home }) {
+  const router = useRouter()
   return (
-    <div className={styles.container}>
+    // <div className={styles.container}>
+    <div className='flex flex-col place-content-start mx-auto h-screen max-w-[1400px]'>
       <Head>
         <link rel='icon' href='/favicon.ico' />
         <meta name='description' content='Manage your employee database' />
@@ -22,7 +26,30 @@ export default function Layout({ children, home }) {
         <meta name='og:title' content={siteTitle} />
       </Head>
       <Header home={home} />
-      {/* <header className={styles.header}>
+
+      <main className='flex flex-col mx-4 bg-bg-color-xlight place-content-evenly h-[82vh]'>
+        {/* <main className='main-home'> */}
+        {children}
+        {!home && (
+          <button
+            className={utilStyles['button']}
+            onClick={() => router.back()}
+          >
+            <FontAwesomeIcon
+              className={utilStyles['fa-small']}
+              icon={faArrowLeft}
+            />{' '}
+            Back
+          </button>
+        )}
+      </main>
+      <Footer />
+    </div>
+  )
+}
+
+{
+  /* <header className={styles.header}>
         
         {home ? (
           <>
@@ -55,16 +82,5 @@ export default function Layout({ children, home }) {
             </h2>
           </>
         )}
-      </header> */}
-      <main>
-        {children}
-        {!home && (
-          <div className={styles.backToHome}>
-            <Link href='/'>← Back to home</Link>
-          </div>
-        )}
-      </main>
-      <Footer />
-    </div>
-  )
+      </header> */
 }
