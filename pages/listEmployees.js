@@ -30,9 +30,9 @@ export default function ListEmployees({ data }) {
       </Head>
       <section>
         <h1>List Employees</h1>
-        {data.map((item, key) => (
+        {/* {data.map((item, key) => (
           <p key={key}>{item.firstName}</p>
-        ))}
+        ))} */}
       </section>
       <button onClick={updateData}>Update data</button>
     </Layout>
