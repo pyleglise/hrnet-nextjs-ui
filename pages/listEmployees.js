@@ -15,7 +15,7 @@ export async function getStaticProps() {
 export default function ListEmployees({ data }) {
   // console.log(data)
   // console.log(typeof data)
-  if (Array.isArray(data)) console.log('data is an array')
+  // if (Array.isArray(data)) console.log('data is an array')
   // let data = data.data
   const updateData = async () => {
     const response = await fetch('/api/v1/updateJsonFile')
@@ -30,8 +30,8 @@ export default function ListEmployees({ data }) {
       </Head>
       <section>
         <h1>List Employees</h1>
-        {data.map((item) => (
-          <p>{item.firstName}</p>
+        {data.map((item, key) => (
+          <p key={key}>{item.firstName}</p>
         ))}
       </section>
       <button onClick={updateData}>Update data</button>
