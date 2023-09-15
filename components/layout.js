@@ -1,7 +1,5 @@
 import Head from 'next/head'
-
 import utilStyles from '../styles/utils.module.scss'
-
 import Header from './header'
 import Footer from './footer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'

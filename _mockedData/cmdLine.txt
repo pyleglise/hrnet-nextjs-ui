@@ -1,0 +1,1 @@
+mongoimport --uri mongodb+srv://dbaxialdata:Nssplm7N1yqSP2ad@cluster0.ywn17hb.mongodb.net/hrnet --collection users --type json --jsonArray --file ..\hrnet-react\src\_mockedData\_mockedEmployeesList.json

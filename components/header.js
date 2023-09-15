@@ -1,6 +1,7 @@
 import Link from 'next/link'
+import Image from 'next/image'
 
-const logo100 = '/images/main-logo-100.webp'
+import logo100 from '../public/images/main-logo-100.webp'
 
 export default function Header({ home }) {
   return (
@@ -19,9 +20,7 @@ export default function Header({ home }) {
               className='bg-bg-color-xlight rounded-tl-3xl rounded-br-3xl'
               href='/'
             >
-              <picture>
-                <img src={logo100} alt='Logo' width='100' height='100' />
-              </picture>
+              <Image src={logo100} alt='Logo' />
             </Link>
 
             <div className='grow'>
