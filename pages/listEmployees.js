@@ -28,11 +28,15 @@ export default function ListEmployees({ data }) {
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      <section>
-        <h1>List Employees</h1>
-        {/* {data.map((item, key) => (
-          <p key={key}>{item.firstName}</p>
-        ))} */}
+      <section className='h-[100%] overflow-hidden'>
+        <h1>Employees list</h1>
+        <article className='h-[100%] text-left overflow-auto'>
+          {data.map((item, key) => (
+            <p
+              key={key}
+            >{`${item.firstName} ; ${item.lastName} ; ${item.dateOfBirth} ; ${item.startDate} ;${item.department} ;${item.city}`}</p>
+          ))}
+        </article>
       </section>
       <button onClick={updateData}>Update data</button>
     </Layout>

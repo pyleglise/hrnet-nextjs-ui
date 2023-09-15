@@ -16,7 +16,7 @@ import logo from '../public/images/main-logo-200.webp'
 // }
 
 export default function Home() {
-  console.log(process.env.NEXT_PUBLIC_API_URL + '/api/v1/employees')
+  // console.log(process.env.NEXT_PUBLIC_API_URL + '/employees')
   return (
     <Layout home={true}>
       <Head>

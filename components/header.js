@@ -6,7 +6,7 @@ import logo100 from '../public/images/main-logo-100.webp'
 export default function Header({ home }) {
   return (
     <header>
-      <nav className='flex py-4 mx-4 place-content-center'>
+      <nav className='flex m-4 place-content-center'>
         {home ? (
           <div className='py-4 mx-4'>
             <p className='text-3xl text-primary-color'>

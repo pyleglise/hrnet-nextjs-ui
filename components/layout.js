@@ -25,7 +25,7 @@ export default function Layout({ children, home }) {
       </Head>
       <Header home={home} />
 
-      <main className='flex flex-col mx-4 bg-bg-color-xlight place-content-evenly h-[82vh]'>
+      <main className='flex flex-col mx-4 bg-bg-color-xlight place-content-evenly h-[82vh] overflow-hidden'>
         {/* <main className='main-home'> */}
         {children}
         {!home && (
