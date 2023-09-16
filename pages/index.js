@@ -5,6 +5,8 @@ import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.scss'
 // import { getSortedPostsData } from '../lib/posts'
 import logo from '../public/images/main-logo-200.webp'
+// import { useDispatch } from 'react-redux'
+// import { setEmployeeList } from '../redux/reducers'
 
 // export async function getStaticProps() {
 //   const allPostsData = getSortedPostsData()
@@ -37,14 +39,14 @@ export default function Home() {
             // onClick={() => dispatch(logingError(''))}
             // state={{ loginAction: 'login' }}
           >
-            Employee list
+            List Employees
           </Link>
           <Link
             href='createEmployee'
             className={utilStyles['btn']}
             // state={{ loginAction: 'signup' }}
           >
-            Create employee
+            Add employee
           </Link>
         </div>
         {/* </div> */}

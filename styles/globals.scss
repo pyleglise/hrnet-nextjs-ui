@@ -1,22 +1,19 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
-@import '../styles/colors.modules.scss';
-// @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900;1,1000&display=swap');
 
 html {
   padding: 0;
   margin: 0;
-  // font-family: 'DM Sans', sans-serif;
-  /* font-size: 1.2vw; */
   font-size: 0.9em;
   text-align: center;
-  background-color: $bg-color-light;
+  @apply bg-bg-color-light;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  @apply accent-primary-color;
 }
 
 body {
@@ -36,4 +33,32 @@ a:visited,
 a:hover,
 a:active {
   text-decoration: none;
+}
+th,
+td {
+  padding: 0 0 0 5px;
+}
+
+// custom tailwind classes
+.layout {
+  @apply flex flex-col mx-auto h-screen max-w-[1400px] min-w-[320px];
+}
+.form-container {
+  @apply w-5/6 px-2 py-4 mt-10 bg-bg-color-light rounded-2xl text-primary-color shadow-md;
+}
+
+.fieldset-container {
+  @apply grow text-left p-2 mb-4;
+}
+
+.input-container {
+  @apply before:table after:table after:clear-both relative my-2;
+}
+
+.input-field {
+  @apply pl-8  rounded h-8 w-full text-black;
+}
+
+.input-icon {
+  @apply block absolute top-1 left-2;
 }
