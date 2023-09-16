@@ -36,6 +36,7 @@ export default function Home() {
           <Link
             href='listEmployees'
             className={utilStyles['btn']}
+            aria-label='List employees'
             // onClick={() => dispatch(logingError(''))}
             // state={{ loginAction: 'login' }}
           >
@@ -43,6 +44,7 @@ export default function Home() {
           </Link>
           <Link
             href='createEmployee'
+            aria-label='Add employee'
             className={utilStyles['btn']}
             // state={{ loginAction: 'signup' }}
           >

@@ -68,6 +68,7 @@ function showTitle(isList, handleToggleList) {
           icon={isList ? faTable : faTableList}
           title={'Toggle to ' + (isList ? 'cards' : 'table')}
           onClick={handleToggleList}
+          aria-label={'Toggle to ' + (isList ? 'cards' : 'table')}
         />
       </div>
     </div>
