@@ -28,7 +28,7 @@ export default function Menu({ showEmployees, createEmployee }) {
         <Link
           href='showEmployees'
           className={utilStyles['btn']}
-          aria-label='List employees'
+          aria-label='Show employees'
         >
           Show employees
         </Link>
