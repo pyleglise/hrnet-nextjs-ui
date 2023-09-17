@@ -46,7 +46,7 @@ export default function ShowEmployees({ data }) {
 }
 function showDataZone(isList, dataState) {
   return (
-    <div className='text-left overflow-hidden h-[calc(100%-2.8em)] '>
+    <div className='flex flex-col justify-between text-left overflow-hidden h-[calc(100%-2.8em)] '>
       {isList ? (
         <EmployeesTable dataState={dataState} />
       ) : (
