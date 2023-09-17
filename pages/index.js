@@ -30,7 +30,7 @@ export default function Home() {
           className={utilStyles['home-logo-img']}
           src={logo}
           alt='Wealth Health Logo'
-          // priority={true}
+          priority={true}
         />
         {/* <div className='main-nav light-colors'> */}
         <div className='flex flex-row place-content-center gap-8'>
