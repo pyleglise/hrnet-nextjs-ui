@@ -14,7 +14,7 @@ import {
   faBuildingUser,
 } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
-import { addEmployee } from '../lib/employees'
+import { addEmployee, listEmployees } from '../lib/employees'
 import { useDispatch, useSelector } from 'react-redux'
 import { setEmployeeList } from '../redux/reducers'
 
@@ -24,17 +24,22 @@ export default function CreateEmployees() {
   const [newUserData, setNewUserData] = useState({})
   const [errorMessage, setErrorMessage] = useState('')
 
-  function handleChange({ currentTarget }) {
-    const { value, id } = currentTarget
-    if (id) {
-      setNewUserData({
-        ...newUserData,
-        [id]: value,
-      })
+  async function fieldsValidation(newUserData) {
+    if (
+      Object.keys(newUserData).length !== 0 &&
+      (!newUserData?.firstName || !newUserData?.lastName)
+    ) {
+      setErrorMessage('You must enter at least a first name and a last name !')
+      return false
     }
-  }
-  function fieldValidation(newUserData) {
-    const userExists = employeeList.find(
+
+    let data = employeeList
+    if (Object.keys(employeeList).length === 0) {
+      data = await listEmployees()
+      dispatch(setEmployeeList({ data }))
+    }
+
+    const userExists = data.find(
       (user) =>
         user.firstName === newUserData.firstName &&
         user.lastName === newUserData.lastName,
@@ -45,14 +50,22 @@ export default function CreateEmployees() {
       )
       return false
     }
-    if (!newUserData.firstName || !newUserData.lastName) {
-      setErrorMessage('You must enter at least a first name and a last name !')
-      return false
-    }
     return true
   }
+
+  function handleChange({ currentTarget }) {
+    const { value, id } = currentTarget
+    setErrorMessage('')
+    if (id) {
+      setNewUserData({
+        ...newUserData,
+        [id]: value,
+      })
+    }
+  }
+
   async function handleSave() {
-    if (newUserData && fieldValidation(newUserData)) {
+    if (await fieldsValidation(newUserData)) {
       const data = await addEmployee({ bodyData: newUserData })
       const element = document.getElementById('createEmployee')
       element.reset()
