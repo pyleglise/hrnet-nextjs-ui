@@ -1,8 +1,9 @@
 import fsPromises from 'fs/promises'
+import fs from 'fs'
 import path from 'path'
 import { sortEmployees } from '../../../../../lib/employees'
 
-const dataFilePath = path.join(
+let dataFilePath = path.join(
   process.cwd(),
   '_mockedData/_mockedEmployeesList.json',
 )
