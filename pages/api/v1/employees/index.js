@@ -1,16 +1,22 @@
 import fsPromises from 'fs/promises'
+import fs from 'fs'
 import path from 'path'
 import { sortEmployees } from '../../../../lib/employees'
 
-const dataFilePath = path.join(
+let dataFilePath = path.join(
   process.cwd(),
   '_mockedData/_mockedEmployeesList.json',
 )
+const tmpFilePath = '/tmp/_mockedEmployeesList.json'
 export default async function handler(req, res) {
+  if (fs.existsSync(tmpFilePath)) {
+    dataFilePath = tmpFilePath
+  }
   if (req.method === 'GET') {
     try {
       // Read the existing data from the JSON file
       const jsonData = await fsPromises.readFile(dataFilePath)
+      // console.log(jsonData)
       let objectData = JSON.parse(jsonData)
       // objectData.sort((a, b) => {
       //   if (a.lastName < b.lastName) {

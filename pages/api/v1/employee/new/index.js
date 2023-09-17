@@ -6,7 +6,12 @@ const dataFilePath = path.join(
   process.cwd(),
   '_mockedData/_mockedEmployeesList.json',
 )
+const tmpFilePath = '/tmp/_mockedEmployeesList.json'
+
 export default async function handler(req, res) {
+  if (fs.existsSync(tmpFilePath)) {
+    dataFilePath = tmpFilePath
+  }
   if (req.method === 'POST') {
     try {
       // console.log('data received :')
@@ -20,7 +25,7 @@ export default async function handler(req, res) {
       // const updatedData = JSON.stringify(objectData)
 
       // Write the updated data to the JSON file
-      await fsPromises.writeFile(dataFilePath, JSON.stringify(objectData))
+      await fsPromises.writeFile(tmpFilePath, JSON.stringify(objectData))
       objectData = sortEmployees(objectData)
       // Send a success response
       res.status(200).json(objectData)
