@@ -54,8 +54,6 @@ export default function EmployeesTable({ dataState }) {
     setCurrentPage(1)
   }, [dataState])
 
-  tableProperties.map((item) => console.log(item))
-
   return (
     <>
       <table className='flex flex-col w-full '>
