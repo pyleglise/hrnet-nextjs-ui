@@ -49,6 +49,7 @@ export default function CreateEmployees() {
       setErrorMessage('You must enter at least a first name and a last name !')
       return false
     }
+    return true
   }
   async function handleSave() {
     if (newUserData && fieldValidation(newUserData)) {
