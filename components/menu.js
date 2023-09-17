@@ -3,7 +3,7 @@ import utilStyles from '../styles/utils.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHome } from '@fortawesome/free-solid-svg-icons'
 
-export default function Menu({ listEmployees, createEmployee }) {
+export default function Menu({ showEmployees, createEmployee }) {
   return (
     <div className='text-primary-color'>
       <Link
@@ -13,7 +13,7 @@ export default function Menu({ listEmployees, createEmployee }) {
       >
         <FontAwesomeIcon icon={faHome} />
       </Link>
-      {listEmployees ? (
+      {showEmployees ? (
         <Link
           href='createEmployee'
           className={utilStyles['btn']}
@@ -26,11 +26,11 @@ export default function Menu({ listEmployees, createEmployee }) {
       )}
       {createEmployee ? (
         <Link
-          href='listEmployees'
+          href='showEmployees'
           className={utilStyles['btn']}
           aria-label='List employees'
         >
-          List employees
+          Show employees
         </Link>
       ) : (
         ''

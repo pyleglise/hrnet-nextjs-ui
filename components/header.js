@@ -10,18 +10,18 @@ const showNoMenuHeader = (
     </p>
   </div>
 )
-export default function Header({ home, listEmployees, createEmployee }) {
+export default function Header({ home, showEmployees, createEmployee }) {
   return (
     <header>
       <nav className='flex m-4 place-content-center'>
         {home
           ? showNoMenuHeader
-          : showMenuHeader(listEmployees, createEmployee)}
+          : showMenuHeader(showEmployees, createEmployee)}
       </nav>
     </header>
   )
 }
-function showMenuHeader(listEmployees, createEmployee) {
+function showMenuHeader(showEmployees, createEmployee) {
   return (
     <>
       <Link
@@ -31,12 +31,13 @@ function showMenuHeader(listEmployees, createEmployee) {
         <Image
           src={logo100}
           alt='Logo'
+          priority={true}
         />
       </Link>
 
       <div className='flex justify-end w-full'>
         <Menu
-          listEmployees={listEmployees}
+          showEmployees={showEmployees}
           createEmployee={createEmployee}
         />
       </div>

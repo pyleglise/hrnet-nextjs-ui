@@ -33,15 +33,15 @@ function addHtmlHead() {
 export default function Layout({
   children,
   home,
-  listEmployees,
+  showEmployees,
   createEmployee,
 }) {
   return (
     <div className='layout'>
-      {addHtmlHead(home, listEmployees, createEmployee)}
+      {addHtmlHead()}
       <Header
         home={home}
-        listEmployees={listEmployees}
+        showEmployees={showEmployees}
         createEmployee={createEmployee}
       />
       <main className='flex flex-col mx-4 bg-bg-color-xlight place-content-evenly h-[82vh] overflow-hidden'>

@@ -30,17 +30,18 @@ export default function Home() {
           className={utilStyles['home-logo-img']}
           src={logo}
           alt='Wealth Health Logo'
+          priority={true}
         />
         {/* <div className='main-nav light-colors'> */}
         <div className='flex flex-row place-content-center gap-8'>
           <Link
-            href='listEmployees'
+            href='showEmployees'
             className={utilStyles['btn']}
-            aria-label='List employees'
+            aria-label='Show employees'
             // onClick={() => dispatch(logingError(''))}
             // state={{ loginAction: 'login' }}
           >
-            List Employees
+            Show Employees
           </Link>
           <Link
             href='createEmployee'

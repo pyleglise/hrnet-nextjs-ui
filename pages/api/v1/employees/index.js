@@ -11,6 +11,15 @@ export default async function handler(req, res) {
       // Read the existing data from the JSON file
       const jsonData = await fsPromises.readFile(dataFilePath)
       const objectData = JSON.parse(jsonData)
+      objectData.sort((a, b) => {
+        if (a.lastName < b.lastName) {
+          return -1
+        }
+        if (a.lastName > b.lastName) {
+          return 1
+        }
+        return 0
+      })
 
       res.status(200).json(objectData)
     } catch (error) {

@@ -8,7 +8,6 @@ export default function EmployeesCards({ dataState }) {
           <EmployeeCard
             item={item}
             key={index}
-            id='id'
           />
         ))}
     </div>

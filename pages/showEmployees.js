@@ -19,7 +19,7 @@ export async function getStaticProps() {
   }
   return { props: { data, error } }
 }
-export default function ListEmployees({ data }) {
+export default function ShowEmployees({ data }) {
   const dispatch = useDispatch()
   const { data: dataState } = useSelector((state) => state.employeeList)
   const [isList, setIsList] = useState(true)
@@ -33,7 +33,7 @@ export default function ListEmployees({ data }) {
   }
 
   return (
-    <Layout listEmployees={true}>
+    <Layout showEmployees={true}>
       <Head>
         <title>{siteTitle + ' - Employees list'}</title>
       </Head>
@@ -63,13 +63,15 @@ function showTitle(isList, handleToggleList) {
         Employees list
       </h1>
       <div className='flex gap-1 p-2 text-secondary-color'>
-        <FontAwesomeIcon
-          className=' text-xl hover:text-bg-color-light'
-          icon={isList ? faTable : faTableList}
-          title={'Toggle to ' + (isList ? 'cards' : 'table')}
-          onClick={handleToggleList}
-          aria-label={'Toggle to ' + (isList ? 'cards' : 'table')}
-        />
+        <span title={'Toggle to ' + (isList ? 'cards' : 'table')}>
+          {/* Need to wrap FontAwesome into a span to add title : bug with next.js */}
+          <FontAwesomeIcon
+            className=' text-xl hover:text-bg-color-light'
+            icon={isList ? faTable : faTableList}
+            onClick={handleToggleList}
+            aria-label={'Toggle to ' + (isList ? 'cards' : 'table')}
+          />
+        </span>
       </div>
     </div>
   )
