@@ -5,7 +5,7 @@ export default function Custom404() {
   return (
     <Layout>
       <Head>
-        <title>{siteTitle}</title>
+        <title>{siteTitle + ' - Error ! Resource not found !'}</title>
       </Head>
 
       <section className='place-self-center p-4 w-1/2 rounded-2xl bg-bg-color-light'>

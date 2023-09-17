@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <Layout home={true}>
       <Head>
-        <title>{siteTitle}</title>
+        <title>{siteTitle + ' - Home'}</title>
       </Head>
       <section className='flex flex-col gap-10'>
         <Image

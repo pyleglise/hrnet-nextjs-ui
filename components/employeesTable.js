@@ -36,7 +36,7 @@ export default function EmployeesTable({ dataState }) {
   // console.log(dataState)
   const handleSort = (column) => {
     const newDirection = sortDirection === 'asc' ? 'desc' : 'asc'
-    const sorted = [...currentUsers].sort((a, b) => {
+    const sorted = [...sortedUsers].sort((a, b) => {
       if (a[column] < b[column]) {
         return sortDirection === 'asc' ? -1 : 1
       }
@@ -45,13 +45,13 @@ export default function EmployeesTable({ dataState }) {
       }
       return 0
     })
-    // setSortedUsers(sorted)
-    setSortedUsers((prevSortedUsers) => {
-      // Create a copy of the entire list and replace only the displayed range with the sorted subset
-      const newSortedUsers = [...prevSortedUsers]
-      newSortedUsers.splice(indexOfFirstUser, usersPerPage, ...sorted)
-      return newSortedUsers
-    })
+    setSortedUsers(sorted)
+    // setSortedUsers((prevSortedUsers) => {
+    //   // Create a copy of the entire list and replace only the displayed range with the sorted subset
+    //   const newSortedUsers = [...prevSortedUsers]
+    //   newSortedUsers.splice(indexOfFirstUser, usersPerPage, ...sorted)
+    //   return newSortedUsers
+    // })
     setSortDirection(newDirection)
     setSortCriteria(column)
   }
