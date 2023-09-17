@@ -246,6 +246,7 @@ function showCreationForm(handleChange) {
               // placeholder='Departement'
               defaultValue='Select option'
               onChange={handleChange}
+              aria-label='Departement'
             >
               <option disabled>Select option</option>
               <option>Sales</option>
