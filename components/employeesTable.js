@@ -63,7 +63,7 @@ export default function EmployeesTable({ dataState }) {
   return (
     <>
       <table className='flex flex-col w-full '>
-        <thead className='table table-fixed flex-none w-full bg-bg-color-light text-primary-color'>
+        <thead className='table table-fixed flex-none w-full bg-secondary-color text-bg-color-xlight'>
           {/* <thead className='table table-fixed flex-none w-[calc(100%-1.2em)] bg-bg-color-light text-primary-color'> */}
           <tr className='cursor-pointer'>
             {tableProperties.map((propertyGroup, groupIndex) => (

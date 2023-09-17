@@ -38,7 +38,8 @@
 }
 .button {
   place-content: center;
-  color: #fff;
+  // color: #fff;
+  @apply text-bg-color-xlight;
   font-size: 1rem;
   padding: 0.5em 1em;
   margin: 0 auto;
