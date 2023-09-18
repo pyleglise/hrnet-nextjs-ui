@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faArrowDownWideShort,
@@ -9,6 +10,7 @@ import {
   faForward,
 } from '@fortawesome/free-solid-svg-icons'
 import utilStyles from '../styles/utils.module.scss'
+import ProgressBar from './progressBar'
 
 const tableProperties = [
   ['firstName', ' First Name'],
@@ -28,11 +30,32 @@ export default function EmployeesTable({ dataState }) {
   const [sortDirection, setSortDirection] = useState('desc') // Initial sorting direction
 
   const [currentPage, setCurrentPage] = useState(1)
-  const usersPerPage = 33 // Set the number of users to display per page
+  const [usersPerPage, setUsersPerPage] = useState(33) // Set the number of users to display per page
 
   const indexOfLastUser = currentPage * usersPerPage
   const indexOfFirstUser = indexOfLastUser - usersPerPage
   const currentUsers = sortedUsers.slice(indexOfFirstUser, indexOfLastUser)
+
+  useEffect(() => {
+    const displayHeight = window.innerHeight
+
+    // console.log('displayHeight=' + displayHeight)
+    // Calculate the number of rows to display based on available height
+    let rowsToFit = 0
+    displayHeight <= 1368 && (rowsToFit = Math.floor(displayHeight / 29))
+    displayHeight <= 1180 && (rowsToFit = Math.floor(displayHeight / 30))
+    displayHeight <= 915 && (rowsToFit = Math.floor(displayHeight / 31))
+    displayHeight <= 740 && (rowsToFit = Math.floor(displayHeight / 33))
+    displayHeight <= 720 && (rowsToFit = Math.floor(displayHeight / 34))
+    displayHeight <= 600 && (rowsToFit = Math.floor(displayHeight / 40))
+    displayHeight <= 568 && (rowsToFit = Math.floor(displayHeight / 44))
+
+    // containerHeight <= 360 && (rowsToFit = Math.floor(containerHeight / 0.92))
+    // containerHeight <= 22 && (rowsToFit = Math.floor(containerHeight / 2.2))
+    // console.log('rowsToFit=' + rowsToFit)
+    // Set the number of users to display per page based on available height
+    setUsersPerPage(rowsToFit)
+  }, [])
   // console.log(dataState)
   const handleSort = (column) => {
     const newDirection = sortDirection === 'asc' ? 'desc' : 'asc'
@@ -82,6 +105,7 @@ export default function EmployeesTable({ dataState }) {
           {showTableRows(currentUsers)}
         </tbody>
       </table>
+
       {showNavButtons(
         currentPage,
         setCurrentPage,
@@ -123,52 +147,55 @@ function showNavButtons(
   usersPerPage,
 ) {
   return (
-    <div className='items-self-end text-center mt-2 '>
-      {currentPage !== 1 && (
-        <>
-          <button
-            onClick={() => setCurrentPage(1)}
-            disabled={currentPage === 1}
-            className={utilStyles.button + ' w-32 '}
-          >
-            <FontAwesomeIcon icon={faBackward} /> First
-          </button>
-          {'  '}
-          <button
-            onClick={() => setCurrentPage(currentPage - 1)}
-            disabled={currentPage === 1}
-            className={utilStyles.button + ' w-32 '}
-          >
-            <FontAwesomeIcon icon={faArrowLeft} />
-            {'  '}
-            Previous
-          </button>
-        </>
-      )}
+    <div className='flex place-self-center'>
+      <button
+        onClick={() => setCurrentPage(1)}
+        disabled={currentPage === 1}
+        className={utilStyles.button + ' mx-1'}
+        title='First Page'
+        aria-label='First Page'
+      >
+        <FontAwesomeIcon icon={faBackward} />
+      </button>
       {'  '}
-      {indexOfLastUser < sortedUsers.length && (
-        <>
-          <button
-            onClick={() => setCurrentPage(currentPage + 1)}
-            disabled={indexOfLastUser >= sortedUsers.length}
-            className={utilStyles.button + ' w-32 '}
-          >
-            Next {'  '}
-            <FontAwesomeIcon icon={faArrowRight} />
-          </button>
-          {'  '}
-          <button
-            onClick={() =>
-              setCurrentPage(Math.ceil(sortedUsers.length / usersPerPage))
-            }
-            disabled={indexOfLastUser >= sortedUsers.length}
-            className={utilStyles.button + ' w-32 '}
-          >
-            Last {'  '}
-            <FontAwesomeIcon icon={faForward} />
-          </button>
-        </>
-      )}
+      <button
+        onClick={() => setCurrentPage(currentPage - 1)}
+        disabled={currentPage === 1}
+        className={utilStyles.button + ' mx-1'}
+        title='Previous Page'
+        aria-label='Previous Page'
+      >
+        <FontAwesomeIcon icon={faArrowLeft} />
+      </button>
+
+      {'  '}
+      <ProgressBar
+        progressPercentage={
+          (currentPage / Math.ceil(sortedUsers.length / usersPerPage)) * 100
+        }
+      />
+      {'  '}
+      <button
+        onClick={() => setCurrentPage(currentPage + 1)}
+        disabled={indexOfLastUser >= sortedUsers.length}
+        className={utilStyles.button + ' mx-1'}
+        title='Next Page'
+        aria-label='Next Page'
+      >
+        <FontAwesomeIcon icon={faArrowRight} />
+      </button>
+      {'  '}
+      <button
+        onClick={() =>
+          setCurrentPage(Math.ceil(sortedUsers.length / usersPerPage))
+        }
+        disabled={indexOfLastUser >= sortedUsers.length}
+        className={utilStyles.button + ' mx-1'}
+        title='Last Page'
+        aria-label='Last Page'
+      >
+        <FontAwesomeIcon icon={faForward} />
+      </button>
     </div>
   )
 }

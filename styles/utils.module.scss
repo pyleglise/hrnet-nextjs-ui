@@ -42,7 +42,7 @@
   @apply text-bg-color-xlight;
   font-size: 1rem;
   padding: 0.5em 1em;
-  margin: 0 auto;
+  // margin: 0 auto;
   border-radius: 5px;
   -webkit-transition: 0.35s ease-in-out;
   -moz-transition: 0.35s ease-in-out;
@@ -58,6 +58,12 @@
     background: #fff;
     @apply shadow-btn-light-blue shadow-[0_2px_10px_5px];
     color: #000;
+  }
+  &:disabled {
+    @apply bg-secondary-color;
+    box-shadow: none;
+    @apply text-bg-color-xlight;
+    opacity: 0.6;
   }
 }
 .fa-small {
