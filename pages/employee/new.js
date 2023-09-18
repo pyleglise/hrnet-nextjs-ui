@@ -12,6 +12,7 @@ import {
   faEnvelope,
   faPlay,
   faBuildingUser,
+  faSpinner,
 } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
 import { addEmployee, listEmployees } from '../../lib/employees'
@@ -23,6 +24,7 @@ export default function CreateEmployees() {
   const employeeList = useSelector((state) => state.employeeList.data)
   const [newUserData, setNewUserData] = useState({})
   const [errorMessage, setErrorMessage] = useState('')
+  const [isLoading, setLoading] = useState(false)
 
   async function fieldsValidation(newUserData) {
     if (
@@ -65,6 +67,7 @@ export default function CreateEmployees() {
   }
 
   async function handleSave() {
+    setLoading(true)
     if (await fieldsValidation(newUserData)) {
       const data = await addEmployee({ bodyData: newUserData })
       const element = document.getElementById('createEmployee')
@@ -72,6 +75,7 @@ export default function CreateEmployees() {
       dispatch(setEmployeeList({ data }))
       setNewUserData({})
     }
+    setLoading(false)
   }
 
   return (
@@ -89,14 +93,13 @@ export default function CreateEmployees() {
                 {errorMessage}
               </p>
             )}
-            {Object.keys(newUserData).length !== 0 && (
-              <button
-                className={utilStyles['button']}
-                onClick={handleSave}
-              >
-                Save
-              </button>
-            )}
+
+            <button
+              className={utilStyles['button']}
+              onClick={handleSave}
+            >
+              {isLoading ? <FontAwesomeIcon icon={faSpinner} /> : 'Save'}
+            </button>
           </div>
         </article>
       </section>
