@@ -15,7 +15,7 @@ export default function Menu({ showEmployees, createEmployee }) {
       </Link>
       {showEmployees ? (
         <Link
-          href='createEmployee'
+          href='employee/new'
           className={utilStyles['btn']}
           aria-label='Add employee'
         >
@@ -26,7 +26,7 @@ export default function Menu({ showEmployees, createEmployee }) {
       )}
       {createEmployee ? (
         <Link
-          href='showEmployees'
+          href='../employees'
           className={utilStyles['btn']}
           aria-label='Show employees'
         >

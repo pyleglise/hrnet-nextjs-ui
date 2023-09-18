@@ -35,7 +35,7 @@ export default function Home() {
         {/* <div className='main-nav light-colors'> */}
         <div className='flex flex-row place-content-center gap-8'>
           <Link
-            href='showEmployees'
+            href='employees'
             className={utilStyles['btn']}
             aria-label='Show employees'
             // onClick={() => dispatch(logingError(''))}
@@ -44,7 +44,7 @@ export default function Home() {
             Show Employees
           </Link>
           <Link
-            href='createEmployee'
+            href='employee/new'
             aria-label='Add employee'
             className={utilStyles['btn']}
             // state={{ loginAction: 'signup' }}

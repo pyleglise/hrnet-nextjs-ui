@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import Layout, { siteTitle } from '../components/layout'
-import utilStyles from '../styles/utils.module.scss'
+import Layout, { siteTitle } from '../../components/layout'
+import utilStyles from '../../styles/utils.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser as faUserReg } from '@fortawesome/free-regular-svg-icons'
 import {
@@ -14,9 +14,9 @@ import {
   faBuildingUser,
 } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
-import { addEmployee, listEmployees } from '../lib/employees'
+import { addEmployee, listEmployees } from '../../lib/employees'
 import { useDispatch, useSelector } from 'react-redux'
-import { setEmployeeList } from '../redux/reducers'
+import { setEmployeeList } from '../../redux/reducers'
 
 export default function CreateEmployees() {
   const dispatch = useDispatch()

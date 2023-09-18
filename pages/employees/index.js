@@ -1,13 +1,13 @@
 import Head from 'next/head'
-import Layout, { siteTitle } from '../components/layout'
-import { listEmployees } from '../lib/employees'
+import Layout, { siteTitle } from '../../components/layout'
+import { listEmployees } from '../../lib/employees'
 import { useSelector, useDispatch } from 'react-redux'
-import { setEmployeeList } from '../redux/reducers'
+import { setEmployeeList } from '../../redux/reducers'
 import { useEffect, useState } from 'react'
-import EmployeesTable from '../components/employeesTable'
+import EmployeesTable from '../../components/employeesTable'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTable, faTableList } from '@fortawesome/free-solid-svg-icons'
-import EmployeesCards from '../components/employeesCards'
+import EmployeesCards from '../../components/employeesCards'
 
 export async function getStaticProps() {
   let data = {}
