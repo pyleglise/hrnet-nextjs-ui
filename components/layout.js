@@ -1,45 +1,68 @@
 import Head from 'next/head'
-import utilStyles from '../styles/utils.module.scss'
 import Header from './header'
 import Footer from './footer'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons'
 import '@fortawesome/fontawesome-svg-core/styles.css'
 import { config } from '@fortawesome/fontawesome-svg-core'
-import { useRouter } from 'next/router'
+
 config.autoAddCss = false
 
 const name = 'Pierre-Yves Léglise'
 export const siteTitle = 'HR-Net - Employee database manager'
-
-export default function Layout({ children, home }) {
-  const router = useRouter()
+function addHtmlHead() {
   return (
-    // <div className={styles.container}>
-    <div className='flex flex-col place-content-start mx-auto h-screen max-w-[1400px]'>
-      <Head>
-        <link rel='icon' href='/favicon.ico' />
-        <meta name='description' content='Manage your employee database' />
-
-        <meta name='og:title' content={siteTitle} />
-      </Head>
-      <Header home={home} />
-
-      <main className='flex flex-col mx-4 bg-bg-color-xlight place-content-evenly h-[82vh]'>
-        {/* <main className='main-home'> */}
+    <Head>
+      <link
+        rel='shortcut icon'
+        href='/images/favicon.ico'
+      />
+      <link
+        rel='apple-touch-icon'
+        sizes='180x180'
+        href='/images/apple-touch-icon.png'
+      />
+      <link
+        rel='icon'
+        type='image/png'
+        sizes='32x32'
+        href='/images/favicon-32x32.png'
+      />
+      <link
+        rel='icon'
+        type='image/png'
+        sizes='16x16'
+        href='/images/favicon-16x16.png'
+      />
+      <meta
+        name='description'
+        content='Manage your employee database'
+      />
+      <meta
+        name='creator'
+        content={name}
+      />
+      <meta
+        name='og:title'
+        content={siteTitle}
+      />
+    </Head>
+  )
+}
+export default function Layout({
+  children,
+  home,
+  showEmployees,
+  createEmployee,
+}) {
+  return (
+    <div className='layout'>
+      {addHtmlHead()}
+      <Header
+        home={home}
+        showEmployees={showEmployees}
+        createEmployee={createEmployee}
+      />
+      <main className='flex flex-col mx-4 bg-bg-color-xlight place-content-evenly h-[82vh] overflow-hidden'>
         {children}
-        {!home && (
-          <button
-            className={utilStyles['button']}
-            onClick={() => router.back()}
-          >
-            <FontAwesomeIcon
-              className={utilStyles['fa-small']}
-              icon={faArrowLeft}
-            />{' '}
-            Back
-          </button>
-        )}
       </main>
       <Footer />
     </div>
@@ -47,38 +70,4 @@ export default function Layout({ children, home }) {
 }
 
 {
-  /* <header className={styles.header}>
-        
-        {home ? (
-          <>
-            <Image
-              priority
-              src='/images/profile.jpg'
-              className={utilStyles.borderCircle}
-              height={144}
-              width={144}
-              alt=''
-            />
-            <h1 className={utilStyles.heading2Xl}>{name}</h1>
-          </>
-        ) : (
-          <>
-            <Link href='/'>
-              <Image
-                priority
-                src='/images/profile.jpg'
-                className={utilStyles.borderCircle}
-                height={108}
-                width={108}
-                alt=''
-              />
-            </Link>
-            <h2 className={utilStyles.headingLg}>
-              <Link href='/' className={utilStyles.colorInherit}>
-                {name}
-              </Link>
-            </h2>
-          </>
-        )}
-      </header> */
 }

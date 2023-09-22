@@ -5,6 +5,8 @@ import Layout, { siteTitle } from '../components/layout'
 import utilStyles from '../styles/utils.module.scss'
 // import { getSortedPostsData } from '../lib/posts'
 import logo from '../public/images/main-logo-200.webp'
+// import { useDispatch } from 'react-redux'
+// import { setEmployeeList } from '../redux/reducers'
 
 // export async function getStaticProps() {
 //   const allPostsData = getSortedPostsData()
@@ -16,11 +18,11 @@ import logo from '../public/images/main-logo-200.webp'
 // }
 
 export default function Home() {
-  // console.log(process.env.NEXT_PUBLIC_API_URL + '/api/v1/employees')
+  // console.log(process.env.NEXT_PUBLIC_API_URL + '/employees')
   return (
     <Layout home={true}>
       <Head>
-        <title>{siteTitle}</title>
+        <title>{siteTitle + ' - Home'}</title>
       </Head>
       <section className='flex flex-col gap-10'>
         <Image
@@ -28,23 +30,26 @@ export default function Home() {
           className={utilStyles['home-logo-img']}
           src={logo}
           alt='Wealth Health Logo'
+          priority={true}
         />
         {/* <div className='main-nav light-colors'> */}
         <div className='flex flex-row place-content-center gap-8'>
           <Link
-            href='listEmployees'
+            href='employees'
             className={utilStyles['btn']}
+            aria-label='Show employees'
             // onClick={() => dispatch(logingError(''))}
             // state={{ loginAction: 'login' }}
           >
-            Employee list
+            Show Employees
           </Link>
           <Link
-            href='createEmployee'
+            href='employee/new'
+            aria-label='Add employee'
             className={utilStyles['btn']}
             // state={{ loginAction: 'signup' }}
           >
-            Create employee
+            Add employee
           </Link>
         </div>
         {/* </div> */}
