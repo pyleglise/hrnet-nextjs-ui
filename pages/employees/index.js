@@ -6,7 +6,11 @@ import { setEmployeeList } from '../../redux/reducers'
 import { useEffect, useState } from 'react'
 import EmployeesTable from '../../components/employeesTable'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTable, faTableList } from '@fortawesome/free-solid-svg-icons'
+import {
+  faSearch,
+  faTable,
+  faTableList,
+} from '@fortawesome/free-solid-svg-icons'
 import EmployeesCards from '../../components/employeesCards'
 
 export async function getStaticProps() {
@@ -62,7 +66,28 @@ function showTitle(isList, handleToggleList) {
       <h1 className='grow text-2xl my-1 text-secondary-color '>
         Employees list
       </h1>
-      <div className='flex gap-1 p-2 text-secondary-color'>
+      {isList ? (
+        <div className='flex'>
+          <input
+            type='text'
+            placeholder='Search'
+            className='pl-1'
+          ></input>
+          <div className='p-2 text-secondary-color bg-white'>
+            <span title={'Search'}>
+              {/* Need to wrap FontAwesome into a span to add title : bug with next.js */}
+              <FontAwesomeIcon
+                className='text-xl hover:text-primary-color'
+                icon={faSearch}
+                aria-label={'Search'}
+              />
+            </span>
+          </div>
+        </div>
+      ) : (
+        ''
+      )}
+      <div className='flex  p-2 text-secondary-color'>
         <span title={'Toggle to ' + (isList ? 'cards' : 'table')}>
           {/* Need to wrap FontAwesome into a span to add title : bug with next.js */}
           <FontAwesomeIcon

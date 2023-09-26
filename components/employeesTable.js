@@ -59,25 +59,18 @@ export default function EmployeesTable({ dataState }) {
   // console.log(dataState)
   const handleSort = (column) => {
     const newDirection = sortDirection === 'asc' ? 'desc' : 'asc'
-    const sorted = [...sortedUsers].sort((a, b) => {
-      if (a[column] < b[column]) {
-        return sortDirection === 'asc' ? -1 : 1
-      }
-      if (a[column] > b[column]) {
-        return sortDirection === 'asc' ? 1 : -1
-      }
-      return 0
-    })
+    const sorted = [...sortedUsers]
+      .sort((a, b) => {
+        if (sortDirection === 'asc') return b[column]?.localeCompare(a[column])
+        else return a[column]?.localeCompare(b[column])
+      })
+      .reverse()
+
     setSortedUsers(sorted)
-    // setSortedUsers((prevSortedUsers) => {
-    //   // Create a copy of the entire list and replace only the displayed range with the sorted subset
-    //   const newSortedUsers = [...prevSortedUsers]
-    //   newSortedUsers.splice(indexOfFirstUser, usersPerPage, ...sorted)
-    //   return newSortedUsers
-    // })
     setSortDirection(newDirection)
     setSortCriteria(column)
   }
+
   useEffect(() => {
     setSortedUsers(dataState)
     setCurrentPage(1)
