@@ -17,7 +17,7 @@ const tableProperties = [
   ['lastName', 'Last Name'],
   ['dateOfBirth', 'Date of birth'],
   ['startDate', 'Start date'],
-  ['department', 'Departement'],
+  ['department', 'Department'],
   ['street', 'Street'],
   ['city', 'City'],
   ['state', 'State'],

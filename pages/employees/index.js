@@ -27,13 +27,36 @@ export default function ShowEmployees({ data }) {
   const dispatch = useDispatch()
   const { data: dataState } = useSelector((state) => state.employeeList)
   const [isList, setIsList] = useState(true)
+  const [searchTerm, setSearchTerm] = useState('')
+  const [filteredData, setFilteredData] = useState(data)
 
   useEffect(() => {
     dataState.length === 0 && data && dispatch(setEmployeeList({ data }))
   }, [data])
 
+  useEffect(() => {
+    const filteredEmployees = dataState.filter((employee) => {
+      return (
+        employee.firstName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.lastName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.startDate?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.department?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.street?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.city?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.state?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.zipCode?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.dateOfBirth?.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    })
+    setFilteredData(filteredEmployees)
+  }, [searchTerm, dataState])
+
   const handleToggleList = () => {
     setIsList(!isList)
+  }
+
+  const handleSearchChange = (e) => {
+    setSearchTerm(e.target.value)
   }
 
   return (
@@ -42,8 +65,8 @@ export default function ShowEmployees({ data }) {
         <title>{siteTitle + ' - Employees list'}</title>
       </Head>
       <section className='w-full h-full'>
-        {showTitle(isList, handleToggleList)}
-        {showDataZone(isList, dataState)}
+        {showTitle(isList, handleToggleList, handleSearchChange)}
+        {showDataZone(isList, filteredData)}
       </section>
     </Layout>
   )
@@ -60,7 +83,7 @@ function showDataZone(isList, dataState) {
   )
 }
 
-function showTitle(isList, handleToggleList) {
+function showTitle(isList, handleToggleList, handleSearchChange) {
   return (
     <div className='flex '>
       <h1 className='grow text-2xl my-1 text-secondary-color '>
@@ -70,14 +93,15 @@ function showTitle(isList, handleToggleList) {
         <div className='flex'>
           <input
             type='text'
-            placeholder='Search'
-            className='pl-1'
+            placeholder='Instant search'
+            className='pl-1 focus:outline-none'
+            onChange={handleSearchChange}
           ></input>
           <div className='p-2 text-secondary-color bg-white'>
             <span title={'Search'}>
               {/* Need to wrap FontAwesome into a span to add title : bug with next.js */}
               <FontAwesomeIcon
-                className='text-xl hover:text-primary-color'
+                className='text-xl'
                 icon={faSearch}
                 aria-label={'Search'}
               />
@@ -91,7 +115,7 @@ function showTitle(isList, handleToggleList) {
         <span title={'Toggle to ' + (isList ? 'cards' : 'table')}>
           {/* Need to wrap FontAwesome into a span to add title : bug with next.js */}
           <FontAwesomeIcon
-            className=' text-xl hover:text-bg-color-light'
+            className=' text-xl cursor-pointer hover:text-bg-color-light'
             icon={isList ? faTable : faTableList}
             onClick={handleToggleList}
             aria-label={'Toggle to ' + (isList ? 'cards' : 'table')}
