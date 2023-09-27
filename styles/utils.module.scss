@@ -69,3 +69,6 @@
 .fa-small {
   font-size: 1rem;
 }
+.darkBG {
+  @apply bg-[rgba(0,0,0,0.2)] w-screen h-screen overflow-hidden z-0 absolute left-0 top-0;
+}

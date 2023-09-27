@@ -24,7 +24,12 @@ const tableProperties = [
   ['zipCode', 'Zip Code'],
 ]
 
-export default function EmployeesTable({ dataState, numberOfLines }) {
+export default function EmployeesTable({
+  dataState,
+  numberOfLines,
+  setModalIsOpen,
+  setUserToOpen,
+}) {
   // console.log(numberOfLines)
   const [sortedUsers, setSortedUsers] = useState(dataState)
   const [sortCriteria, setSortCriteria] = useState('lastName')
@@ -63,6 +68,11 @@ export default function EmployeesTable({ dataState, numberOfLines }) {
     setSortCriteria(column)
   }
 
+  const handleClick = (user) => {
+    setUserToOpen(user)
+    setModalIsOpen(true)
+  }
+
   return (
     <>
       <table className='flex flex-col h-[39vh] h2xs:h-[39vh] hxs:h-[54vh] hs:h-[60vh] hm:h-[65vh] hl:h-[71vh] hxl:h-[73vh] w-full bg-secondary-color '>
@@ -84,7 +94,7 @@ export default function EmployeesTable({ dataState, numberOfLines }) {
 
         <tbody className='block flex-auto w-full overflow-y-scroll bg-bg-color-xlight'>
           {/* <tbody className='block flex-auto w-full h-[40vh] xs:h-[50vh] sm:h-[55vh] md:h-[60vh] lg:h-[71vh] xl:h-[72vh] overflow-y-scroll bg-bg-color-xlight'> */}
-          {showTableRows(currentUsers)}
+          {showTableRows(currentUsers, handleClick)}
         </tbody>
       </table>
 
@@ -98,7 +108,7 @@ export default function EmployeesTable({ dataState, numberOfLines }) {
     </>
   )
 }
-function showTableRows(currentUsers) {
+function showTableRows(currentUsers, handleClick) {
   return (
     <>
       {currentUsers.map((item, index) => (
@@ -106,6 +116,7 @@ function showTableRows(currentUsers) {
           className='table table-fixed w-full cursor-pointer hover:bg-bg-color-light hover:text-white'
           id={index}
           key={index}
+          onClick={() => handleClick(item)}
         >
           {tableProperties.map((propertyGroup, groupIndex) => (
             <td
