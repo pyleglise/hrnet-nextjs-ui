@@ -18,6 +18,7 @@ import { useState } from 'react'
 import { addEmployee, listEmployees } from '../../lib/employees'
 import { useDispatch, useSelector } from 'react-redux'
 import { setEmployeeList } from '../../redux/reducers'
+import DatePicker from '../../components/datePicker'
 
 export default function CreateEmployees() {
   const dispatch = useDispatch()
@@ -25,6 +26,10 @@ export default function CreateEmployees() {
   const [newUserData, setNewUserData] = useState({})
   const [errorMessage, setErrorMessage] = useState('')
   const [isLoading, setLoading] = useState(false)
+  const [modalIsOpen, setModalIsOpen] = useState(false)
+  const [dateOfBirthChosen, setDateOfBirthChosen] = useState(null)
+  const [dateOfStartChosen, setDateOfStartChosen] = useState(null)
+  const [clickedInput, setClickedInput] = useState(null)
 
   async function fieldsValidation(newUserData) {
     if (
@@ -77,6 +82,10 @@ export default function CreateEmployees() {
     }
     setLoading(false)
   }
+  const handleDatePicker = (e) => {
+    setClickedInput(e.target.id)
+    setModalIsOpen(true)
+  }
 
   return (
     <Layout createEmployee={true}>
@@ -87,7 +96,12 @@ export default function CreateEmployees() {
         <h1 className='text-2xl my-1 text-secondary-color'>Add new Employee</h1>
         <article className='flex justify-center '>
           <div className='form-container'>
-            {showCreationForm(handleChange)}
+            {showCreationForm(
+              handleChange,
+              handleDatePicker,
+              dateOfBirthChosen,
+              dateOfStartChosen,
+            )}
             {errorMessage && (
               <p className='text-red-600 font-bold text-lg text-center mb-3'>
                 {errorMessage}
@@ -103,10 +117,21 @@ export default function CreateEmployees() {
           </div>
         </article>
       </section>
+      {modalIsOpen && (
+        <DatePicker
+          setModalIsOpen={setModalIsOpen}
+          clickedInput={clickedInput}
+        />
+      )}
     </Layout>
   )
 }
-function showCreationForm(handleChange) {
+function showCreationForm(
+  handleChange,
+  handleDatePicker,
+  dateOfBirthChosen,
+  dateOfStartChosen,
+) {
   return (
     <form
       action='#'
@@ -118,7 +143,7 @@ function showCreationForm(handleChange) {
         <fieldset className='w-full'>
           <div className='input-container'>
             <input
-              className='input-field'
+              className='input-field outline-none'
               type='text'
               id='firstName'
               placeholder='First Name'
@@ -134,7 +159,7 @@ function showCreationForm(handleChange) {
         <fieldset className='w-full'>
           <div className='input-container'>
             <input
-              className='input-field'
+              className='input-field outline-none'
               type='text'
               id='lastName'
               placeholder='Last Name'
@@ -149,11 +174,13 @@ function showCreationForm(handleChange) {
         <fieldset className='w-full'>
           <div className='input-container'>
             <input
-              className='input-field'
+              className='input-field outline-none'
               type='text'
               id='dateOfBirth'
               placeholder='Date of birth'
+              value={dateOfBirthChosen}
               onChange={handleChange}
+              onClick={handleDatePicker}
             />
             <div className='input-icon'>
               <FontAwesomeIcon icon={faBaby} />
@@ -168,7 +195,7 @@ function showCreationForm(handleChange) {
         <fieldset className='w-full'>
           <div className='input-container'>
             <input
-              className='input-field'
+              className='input-field outline-none'
               type='text'
               id='street'
               placeholder='Street'
@@ -182,7 +209,7 @@ function showCreationForm(handleChange) {
         <fieldset className='w-full'>
           <div className='input-container'>
             <input
-              className='input-field'
+              className='input-field outline-none'
               type='text'
               id='city'
               placeholder='City'
@@ -196,7 +223,7 @@ function showCreationForm(handleChange) {
         <fieldset className='w-full'>
           <div className='input-container'>
             <input
-              className='input-field'
+              className='input-field outline-none'
               type='text'
               id='state'
               placeholder='State'
@@ -211,7 +238,7 @@ function showCreationForm(handleChange) {
         <fieldset className='w-full'>
           <div className='input-container'>
             <input
-              className='input-field'
+              className='input-field outline-none'
               type='text'
               id='zipCode'
               placeholder='Zip Code'
@@ -228,11 +255,13 @@ function showCreationForm(handleChange) {
         <fieldset className='w-full'>
           <div className='input-container'>
             <input
-              className='input-field'
+              className='input-field outline-none'
               type='text'
               id='startDate'
               placeholder='Start date'
+              value={dateOfStartChosen}
               onChange={handleChange}
+              onClick={handleDatePicker}
             />
             <div className='input-icon'>
               <FontAwesomeIcon icon={faPlay} />
@@ -243,7 +272,7 @@ function showCreationForm(handleChange) {
         <fieldset className='w-full'>
           <div className='input-container'>
             <select
-              className='input-field '
+              className='input-field  outline-none'
               type='text'
               id='department'
               // placeholder='Departement'

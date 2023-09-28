@@ -3,7 +3,11 @@ import store from '../redux/store'
 
 import { DM_Sans } from 'next/font/google'
 import '../styles/globals.scss'
-const dm_sans = DM_Sans({ subsets: ['latin'] })
+const dm_sans = DM_Sans({
+  subsets: ['latin'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  style: ['normal', 'italic'],
+})
 
 // export function reportWebVitals(metric) {
 //   console.log(metric)
@@ -12,7 +16,10 @@ const dm_sans = DM_Sans({ subsets: ['latin'] })
 export default function App({ Component, pageProps }) {
   return (
     <Provider store={store}>
-      <style jsx global>{`
+      <style
+        jsx
+        global
+      >{`
         html {
           font-family: ${dm_sans.style.fontFamily};
         }
