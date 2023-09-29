@@ -61,7 +61,7 @@ export default function Layout({
         showEmployees={showEmployees}
         createEmployee={createEmployee}
       />
-      <main className='flex flex-col mx-4 bg-bg-color-xlight place-content-evenly h-[82vh] overflow-hidden'>
+      <main className='flex flex-col mx-4 bg-bg-color-xlight place-content-evenly h-[82vh] overflow-auto'>
         {children}
       </main>
       <Footer />

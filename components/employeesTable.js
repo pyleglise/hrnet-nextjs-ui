@@ -24,69 +24,59 @@ const tableProperties = [
   ['zipCode', 'Zip Code'],
 ]
 
-export default function EmployeesTable({ dataState }) {
+export default function EmployeesTable({
+  dataState,
+  numberOfLines,
+  setModalIsOpen,
+  setUserToOpen,
+}) {
+  // console.log(numberOfLines)
   const [sortedUsers, setSortedUsers] = useState(dataState)
   const [sortCriteria, setSortCriteria] = useState('lastName')
   const [sortDirection, setSortDirection] = useState('desc') // Initial sorting direction
-
   const [currentPage, setCurrentPage] = useState(1)
-  const [usersPerPage, setUsersPerPage] = useState(33) // Set the number of users to display per page
+  const [usersPerPage, setUsersPerPage] = useState(numberOfLines) // Set the number of users to display per page
 
   const indexOfLastUser = currentPage * usersPerPage
   const indexOfFirstUser = indexOfLastUser - usersPerPage
   const currentUsers = sortedUsers.slice(indexOfFirstUser, indexOfLastUser)
 
   useEffect(() => {
-    const displayHeight = window.innerHeight
+    setUsersPerPage(numberOfLines)
+  }, [numberOfLines, sortCriteria, sortDirection, currentPage])
 
-    // console.log('displayHeight=' + displayHeight)
-    // Calculate the number of rows to display based on available height
-    let rowsToFit = 0
-    displayHeight <= 1368 && (rowsToFit = Math.floor(displayHeight / 29))
-    displayHeight <= 1180 && (rowsToFit = Math.floor(displayHeight / 30))
-    displayHeight <= 915 && (rowsToFit = Math.floor(displayHeight / 31))
-    displayHeight <= 740 && (rowsToFit = Math.floor(displayHeight / 33))
-    displayHeight <= 720 && (rowsToFit = Math.floor(displayHeight / 34))
-    displayHeight <= 600 && (rowsToFit = Math.floor(displayHeight / 40))
-    displayHeight <= 568 && (rowsToFit = Math.floor(displayHeight / 44))
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [numberOfLines])
 
-    // containerHeight <= 360 && (rowsToFit = Math.floor(containerHeight / 0.92))
-    // containerHeight <= 22 && (rowsToFit = Math.floor(containerHeight / 2.2))
-    // console.log('rowsToFit=' + rowsToFit)
-    // Set the number of users to display per page based on available height
-    setUsersPerPage(rowsToFit)
-  }, [])
-  // console.log(dataState)
-  const handleSort = (column) => {
-    const newDirection = sortDirection === 'asc' ? 'desc' : 'asc'
-    const sorted = [...sortedUsers].sort((a, b) => {
-      if (a[column] < b[column]) {
-        return sortDirection === 'asc' ? -1 : 1
-      }
-      if (a[column] > b[column]) {
-        return sortDirection === 'asc' ? 1 : -1
-      }
-      return 0
-    })
-    setSortedUsers(sorted)
-    // setSortedUsers((prevSortedUsers) => {
-    //   // Create a copy of the entire list and replace only the displayed range with the sorted subset
-    //   const newSortedUsers = [...prevSortedUsers]
-    //   newSortedUsers.splice(indexOfFirstUser, usersPerPage, ...sorted)
-    //   return newSortedUsers
-    // })
-    setSortDirection(newDirection)
-    setSortCriteria(column)
-  }
   useEffect(() => {
     setSortedUsers(dataState)
     setCurrentPage(1)
   }, [dataState])
 
+  const handleSort = (column) => {
+    let newDirection = 'desc'
+    if (sortCriteria === column) {
+      newDirection = sortDirection === 'asc' ? 'desc' : 'asc'
+    }
+    const sorted = [...sortedUsers].sort((a, b) => {
+      if (newDirection === 'asc') return b[column]?.localeCompare(a[column])
+      else return a[column]?.localeCompare(b[column])
+    })
+    setSortDirection(newDirection)
+    setSortedUsers(sorted)
+    setSortCriteria(column)
+  }
+
+  const handleClick = (user) => {
+    setUserToOpen(user)
+    setModalIsOpen(true)
+  }
+
   return (
     <>
-      <table className='flex flex-col w-full '>
-        <thead className='table table-fixed flex-none w-full bg-secondary-color text-bg-color-xlight'>
+      <table className='flex flex-col h-[39vh] h2xs:h-[39vh] hxs:h-[54vh] hs:h-[60vh] hm:h-[65vh] hl:h-[71vh] hxl:h-[73vh] w-full bg-secondary-color '>
+        <thead className='table table-fixed flex-none w-full xl:w-[calc(100%-1.2em)]   bg-secondary-color text-bg-color-xlight'>
           {/* <thead className='table table-fixed flex-none w-[calc(100%-1.2em)] bg-bg-color-light text-primary-color'> */}
           <tr className='cursor-pointer'>
             {tableProperties.map((propertyGroup, groupIndex) => (
@@ -101,8 +91,10 @@ export default function EmployeesTable({ dataState }) {
             ))}
           </tr>
         </thead>
-        <tbody className='block flex-auto  w-full h-full overflow-y-auto'>
-          {showTableRows(currentUsers)}
+
+        <tbody className='block flex-auto w-full overflow-y-scroll bg-bg-color-xlight'>
+          {/* <tbody className='block flex-auto w-full h-[40vh] xs:h-[50vh] sm:h-[55vh] md:h-[60vh] lg:h-[71vh] xl:h-[72vh] overflow-y-scroll bg-bg-color-xlight'> */}
+          {showTableRows(currentUsers, handleClick)}
         </tbody>
       </table>
 
@@ -116,7 +108,7 @@ export default function EmployeesTable({ dataState }) {
     </>
   )
 }
-function showTableRows(currentUsers) {
+function showTableRows(currentUsers, handleClick) {
   return (
     <>
       {currentUsers.map((item, index) => (
@@ -124,6 +116,7 @@ function showTableRows(currentUsers) {
           className='table table-fixed w-full cursor-pointer hover:bg-bg-color-light hover:text-white'
           id={index}
           key={index}
+          onClick={() => handleClick(item)}
         >
           {tableProperties.map((propertyGroup, groupIndex) => (
             <td
@@ -147,56 +140,63 @@ function showNavButtons(
   usersPerPage,
 ) {
   return (
-    <div className='flex place-self-center'>
-      <button
-        onClick={() => setCurrentPage(1)}
-        disabled={currentPage === 1}
-        className={utilStyles.button + ' mx-1'}
-        title='First Page'
-        aria-label='First Page'
-      >
-        <FontAwesomeIcon icon={faBackward} />
-      </button>
-      {'  '}
-      <button
-        onClick={() => setCurrentPage(currentPage - 1)}
-        disabled={currentPage === 1}
-        className={utilStyles.button + ' mx-1'}
-        title='Previous Page'
-        aria-label='Previous Page'
-      >
-        <FontAwesomeIcon icon={faArrowLeft} />
-      </button>
+    <>
+      {sortedUsers.length > usersPerPage &&
+        sortedUsers.length + 1 !== usersPerPage && (
+          <div className='flex place-self-center mt-3'>
+            <button
+              onClick={() => setCurrentPage(1)}
+              disabled={currentPage === 1}
+              className={utilStyles.button + ' mx-1'}
+              title='First Page'
+              aria-label='First Page'
+            >
+              <FontAwesomeIcon icon={faBackward} />
+            </button>
+            {'  '}
+            <button
+              onClick={() => setCurrentPage(currentPage - 1)}
+              disabled={currentPage === 1}
+              className={utilStyles.button + ' mx-1'}
+              title='Previous Page'
+              aria-label='Previous Page'
+            >
+              <FontAwesomeIcon icon={faArrowLeft} />
+            </button>
 
-      {'  '}
-      <ProgressBar
-        progressPercentage={
-          (currentPage / Math.ceil(sortedUsers.length / usersPerPage)) * 100
-        }
-      />
-      {'  '}
-      <button
-        onClick={() => setCurrentPage(currentPage + 1)}
-        disabled={indexOfLastUser >= sortedUsers.length}
-        className={utilStyles.button + ' mx-1'}
-        title='Next Page'
-        aria-label='Next Page'
-      >
-        <FontAwesomeIcon icon={faArrowRight} />
-      </button>
-      {'  '}
-      <button
-        onClick={() =>
-          setCurrentPage(Math.ceil(sortedUsers.length / usersPerPage))
-        }
-        disabled={indexOfLastUser >= sortedUsers.length}
-        className={utilStyles.button + ' mx-1'}
-        title='Last Page'
-        aria-label='Last Page'
-      >
-        <FontAwesomeIcon icon={faForward} />
-      </button>
-    </div>
+            {'  '}
+            <ProgressBar
+              progressPercentage={
+                (currentPage /
+                  Math.ceil((sortedUsers.length + 1) / usersPerPage)) *
+                100
+              }
+            />
+            {'  '}
+            <button
+              onClick={() => setCurrentPage(currentPage + 1)}
+              disabled={indexOfLastUser >= sortedUsers.length}
+              className={utilStyles.button + ' mx-1'}
+              title='Next Page'
+              aria-label='Next Page'
+            >
+              <FontAwesomeIcon icon={faArrowRight} />
+            </button>
+            {'  '}
+            <button
+              onClick={() =>
+                setCurrentPage(Math.ceil(sortedUsers.length / usersPerPage))
+              }
+              disabled={indexOfLastUser >= sortedUsers.length}
+              className={utilStyles.button + ' mx-1'}
+              title='Last Page'
+              aria-label='Last Page'
+            >
+              <FontAwesomeIcon icon={faForward} />
+            </button>
+          </div>
+        )}
+    </>
   )
 }
 
