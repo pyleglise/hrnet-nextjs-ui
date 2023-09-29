@@ -14,7 +14,7 @@ import {
   faBuildingUser,
   faSpinner,
 } from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { addEmployee, listEmployees } from '../../lib/employees'
 import { useDispatch, useSelector } from 'react-redux'
 import { setEmployeeList } from '../../redux/reducers'
@@ -27,9 +27,29 @@ export default function CreateEmployees() {
   const [errorMessage, setErrorMessage] = useState('')
   const [isLoading, setLoading] = useState(false)
   const [modalIsOpen, setModalIsOpen] = useState(false)
-  const [dateOfBirthChosen, setDateOfBirthChosen] = useState(null)
-  const [dateOfStartChosen, setDateOfStartChosen] = useState(null)
   const [clickedInput, setClickedInput] = useState(null)
+  const startDate =
+    typeof document !== 'undefined' &&
+    document.getElementById('startDate')?.value
+  const dateOfBirth =
+    typeof document !== 'undefined' &&
+    document.getElementById('dateOfBirth')?.value
+
+  useEffect(() => {
+    startDate &&
+      setNewUserData({
+        ...newUserData,
+        ['startDate']: startDate,
+      })
+  }, [startDate])
+
+  useEffect(() => {
+    dateOfBirth &&
+      setNewUserData({
+        ...newUserData,
+        ['dateOfBirth']: dateOfBirth,
+      })
+  }, [dateOfBirth])
 
   async function fieldsValidation(newUserData) {
     if (
@@ -57,11 +77,13 @@ export default function CreateEmployees() {
       )
       return false
     }
+
     return true
   }
 
   function handleChange({ currentTarget }) {
     const { value, id } = currentTarget
+
     setErrorMessage('')
     if (id) {
       setNewUserData({
@@ -82,7 +104,9 @@ export default function CreateEmployees() {
     }
     setLoading(false)
   }
+
   const handleDatePicker = (e) => {
+    setErrorMessage('')
     setClickedInput(e.target.id)
     setModalIsOpen(true)
   }
@@ -92,15 +116,15 @@ export default function CreateEmployees() {
       <Head>
         <title>{siteTitle + ' - New employee'}</title>
       </Head>
-      <section className='w-full h-full'>
+      <section className='w-full h-full '>
         <h1 className='text-2xl my-1 text-secondary-color'>Add new Employee</h1>
         <article className='flex justify-center '>
-          <div className='form-container'>
+          <div className='form-container mb-4'>
             {showCreationForm(
               handleChange,
               handleDatePicker,
-              dateOfBirthChosen,
-              dateOfStartChosen,
+              // dateOfBirthChosen,
+              // dateOfStartChosen,
             )}
             {errorMessage && (
               <p className='text-red-600 font-bold text-lg text-center mb-3'>
@@ -129,8 +153,8 @@ export default function CreateEmployees() {
 function showCreationForm(
   handleChange,
   handleDatePicker,
-  dateOfBirthChosen,
-  dateOfStartChosen,
+  // dateOfBirthChosen,
+  // dateOfStartChosen,
 ) {
   return (
     <form
@@ -178,8 +202,6 @@ function showCreationForm(
               type='text'
               id='dateOfBirth'
               placeholder='Date of birth'
-              value={dateOfBirthChosen}
-              onChange={handleChange}
               onClick={handleDatePicker}
             />
             <div className='input-icon'>
@@ -259,7 +281,7 @@ function showCreationForm(
               type='text'
               id='startDate'
               placeholder='Start date'
-              value={dateOfStartChosen}
+              // value={dateOfStartChosen}
               onChange={handleChange}
               onClick={handleDatePicker}
             />
