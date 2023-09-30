@@ -145,8 +145,14 @@ function showTitle(
         </h1>
         {isList ? (
           <div className='flex'>
-            <p className='xl:text-lg text-xs mr-2 my-auto'>Lines displayed</p>
+            <label
+              htmlFor='pageSelector'
+              className='xl:text-lg text-xs mr-2 my-auto'
+            >
+              Lines displayed
+            </label>
             <select
+              id='pageSelector'
               className='xl:text-lg text-xs mr-3 focus:outline-none'
               defaultValue='30'
               onChange={handleChangeNbOfLines}

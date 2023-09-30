@@ -23,15 +23,16 @@ export default function SelectMenu({
   return (
     <>
       <div className='relative'>
-        <div
+        <input
           className={
-            'bg-white rounded p-1 pl-8 cursor-pointer ' +
-            (selectedElement === '' ? ' text-gray-400' : ' text-black')
+            'bg-white rounded p-1 pl-8 cursor-pointer w-full outline-none  text-black'
           }
           onClick={toggleDropdown}
-        >
-          {selectedElement || placeHolderText}
-        </div>
+          placeholder={placeHolderText}
+          value={selectedElement || ''}
+          readOnly
+        />
+
         {dropdownOpen && (
           <div
             className='absolute z-10 max-h-52 mt-2 w-full bg-white text-black rounded overflow-auto'
