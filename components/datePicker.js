@@ -12,7 +12,7 @@ const dateNow = new Date()
 const yearNow = dateNow.getFullYear()
 
 export default function DatePicker({
-  setModalIsOpen,
+  setModalDateIsOpen,
   clickedInput,
   endYear = yearNow,
   yearCount = 100,
@@ -43,7 +43,7 @@ export default function DatePicker({
 
   const selectDate = (date) => {
     document.getElementById(clickedInput).value = formatDateUS(date)
-    setModalIsOpen(false)
+    setModalDateIsOpen(false)
   }
   const toggleYearScreen = () => {
     setYearSelectIsOpen(!yearSelectIsOpen)
@@ -247,11 +247,12 @@ export default function DatePicker({
       <div
         className={utilStyles['darkBG']}
         onClick={(e) => {
-          e.target.className === utilStyles['darkBG'] && setModalIsOpen(false)
+          e.target.className === utilStyles['darkBG'] &&
+            setModalDateIsOpen(false)
         }}
       >
         <div
-          className='fixed h-auto w-auto  bg-bg-color-xlight rounded-lg shadow-[0_5px_20px_0] really-dark'
+          className='fixed h-auto w-auto  bg-white rounded-lg shadow-[0_5px_20px_0] really-dark'
           style={{ top: topOffset, left: leftOffset }}
         >
           <div className='text-left mx-3 py-2 w-[16.3em] h-[13.1em] '>

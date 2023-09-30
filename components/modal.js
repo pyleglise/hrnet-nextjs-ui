@@ -1,8 +1,8 @@
 import { faClose } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import utilStyles from '../styles/utils.module.scss'
-import EmployeeCard from './employeeCard'
-export default function EmployeeModal({ setModalIsOpen, userToOpen }) {
+
+export default function Modal({ setModalIsOpen, content }) {
   const handleClose = () => {
     setModalIsOpen(false)
   }
@@ -21,9 +21,7 @@ export default function EmployeeModal({ setModalIsOpen, userToOpen }) {
           >
             <FontAwesomeIcon icon={faClose} />
           </button>
-          <div className='text-left'>
-            <EmployeeCard item={userToOpen} />
-          </div>
+          <div className='text-left'>{content}</div>
         </div>
       </div>
     </div>

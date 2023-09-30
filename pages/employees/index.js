@@ -12,7 +12,8 @@ import {
   faTableList,
 } from '@fortawesome/free-solid-svg-icons'
 import EmployeesCards from '../../components/employeesCards'
-import EmployeeModal from '../../components/employeeModal'
+import EmployeeCard from '../../components/employeeCard'
+import Modal from '../../components/modal'
 
 export async function getStaticProps() {
   let data = {}
@@ -93,9 +94,10 @@ export default function ShowEmployees({ data }) {
         )}
       </section>
       {modalIsOpen && (
-        <EmployeeModal
+        <Modal
           setModalIsOpen={setModalIsOpen}
-          userToOpen={userToOpen}
+          content={<EmployeeCard item={userToOpen} />}
+          // userToOpen={userToOpen}
         />
       )}
     </Layout>
