@@ -9,6 +9,7 @@ import {
 import formatDateUS from '../lib/dateFormat'
 import utilStyles from '../styles/utils.module.scss'
 const dateNow = new Date()
+
 const yearNow = dateNow.getFullYear()
 
 export default function DatePicker({
@@ -60,7 +61,9 @@ export default function DatePicker({
       selectedDate.getMonth(),
       1,
     )
-    return firstDay.getDay()
+    // console.log(firstDay.getDay())
+    if (firstDay.getDay() === 0) return 7
+    else return firstDay.getDay()
   }
   const generateYears = () => {
     const today = new Date()
@@ -84,7 +87,7 @@ export default function DatePicker({
     return (
       <div
         className={
-          'grid grid-cols-5 w-full pr-1 text-base text-center cursor-default h-[10.4em] overflow-y-auto'
+          'grid grid-cols-5 w-full pr-1 text-base text-center cursor-default h-[11.6em] overflow-y-auto'
         }
       >
         {years.reverse()}
@@ -120,7 +123,7 @@ export default function DatePicker({
       <div
         // ref={refYearsList}
         className={
-          'grid grid-cols-3 w-full text-base cursor-default h-[10.4em] overflow-y-auto'
+          'grid grid-cols-3 w-full text-base cursor-default h-[11.6em] overflow-y-auto'
         }
       >
         {months}
@@ -137,6 +140,7 @@ export default function DatePicker({
     )
     const today = new Date()
     const dayToday = today.getDate()
+
     const yearToday = today.getFullYear()
     const selectedYear = selectedDate.getFullYear()
     const monthToday = today.getMonth()
@@ -255,7 +259,7 @@ export default function DatePicker({
           className='fixed h-auto w-auto  bg-white rounded-lg shadow-[0_5px_20px_0] really-dark'
           style={{ top: topOffset, left: leftOffset }}
         >
-          <div className='text-left mx-3 py-2 w-[16.3em] h-[13.1em] '>
+          <div className='text-left mx-3 py-2 w-[16.3em] h-[14.6em] '>
             {datePickerNavigator()}
             <div className=''>
               {yearSelectIsOpen

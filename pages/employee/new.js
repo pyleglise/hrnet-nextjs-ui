@@ -1,5 +1,5 @@
 import Head from 'next/head'
-
+// import DatePicker from '../../components/datePicker'
 import { DatePicker } from 'date-picker-nextjs'
 import 'date-picker-nextjs/dist/components/Datepicker.css'
 import Layout, { siteTitle } from '../../components/layout'
@@ -19,7 +19,7 @@ import { useEffect, useState } from 'react'
 import { addEmployee, listEmployees } from '../../lib/employees'
 import { useDispatch, useSelector } from 'react-redux'
 import { setEmployeeList } from '../../redux/reducers'
-// import DatePicker from '../../components/datePicker'
+
 import SelectMenu from '../../components/selectMenu'
 import departments from '../../data/departements.json'
 import states from '../../data/states.json'
