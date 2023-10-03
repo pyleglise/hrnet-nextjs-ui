@@ -13,7 +13,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import EmployeesCards from '../../components/employeesCards'
 import EmployeeCard from '../../components/employeeCard'
-import Modal from '../../components/modal'
+// import Modal from '../../components/modal'
+import { Modal } from 'modal-nextjs'
+import 'modal-nextjs/dist/components/Modal.css'
 
 export async function getStaticProps() {
   let data = {}
@@ -97,7 +99,6 @@ export default function ShowEmployees({ data }) {
         <Modal
           setModalIsOpen={setModalIsOpen}
           content={<EmployeeCard item={userToOpen} />}
-          // userToOpen={userToOpen}
         />
       )}
     </Layout>

@@ -23,7 +23,9 @@ import { setEmployeeList } from '../../redux/reducers'
 import SelectMenu from '../../components/selectMenu'
 import departments from '../../data/departements.json'
 import states from '../../data/states.json'
-import Modal from '../../components/modal'
+// import Modal from '../../components/modal'
+import { Modal } from 'modal-nextjs'
+import 'modal-nextjs/dist/components/Modal.css'
 export default function CreateEmployees() {
   const dispatch = useDispatch()
   const employeeList = useSelector((state) => state.employeeList.data)
