@@ -1,7 +1,8 @@
 import { Provider } from 'react-redux'
 import store from '../redux/store'
-
+// import 'date-picker-nextjs/dist/components/Datepicker.scss'
 import { DM_Sans } from 'next/font/google'
+
 import '../styles/globals.scss'
 const dm_sans = DM_Sans({
   subsets: ['latin'],
