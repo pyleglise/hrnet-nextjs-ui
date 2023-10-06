@@ -12,7 +12,10 @@ import {
   faTableList,
 } from '@fortawesome/free-solid-svg-icons'
 import EmployeesCards from '../../components/employeesCards'
-import EmployeeModal from '../../components/employeeModal'
+import EmployeeCard from '../../components/employeeCard'
+// import Modal from '../../components/modal'
+import { Modal } from 'modal-nextjs'
+import 'modal-nextjs/dist/components/Modal.css'
 
 export async function getStaticProps() {
   let data = {}
@@ -93,9 +96,9 @@ export default function ShowEmployees({ data }) {
         )}
       </section>
       {modalIsOpen && (
-        <EmployeeModal
+        <Modal
           setModalIsOpen={setModalIsOpen}
-          userToOpen={userToOpen}
+          content={<EmployeeCard item={userToOpen} />}
         />
       )}
     </Layout>
@@ -143,8 +146,14 @@ function showTitle(
         </h1>
         {isList ? (
           <div className='flex'>
-            <p className='xl:text-lg text-xs mr-2 my-auto'>Lines displayed</p>
+            <label
+              htmlFor='pageSelector'
+              className='xl:text-lg text-xs mr-2 my-auto'
+            >
+              Lines displayed
+            </label>
             <select
+              id='pageSelector'
               className='xl:text-lg text-xs mr-3 focus:outline-none'
               defaultValue='30'
               onChange={handleChangeNbOfLines}
