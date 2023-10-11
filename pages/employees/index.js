@@ -15,7 +15,6 @@ import EmployeesCards from '../../components/employeesCards'
 import EmployeeCard from '../../components/employeeCard'
 // import Modal from '../../components/modal'
 import { Modal } from 'modal-nextjs'
-import 'modal-nextjs/dist/components/Modal.css'
 
 export async function getStaticProps() {
   let data = {}

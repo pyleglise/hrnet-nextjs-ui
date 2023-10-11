@@ -1,7 +1,7 @@
 import Head from 'next/head'
 // import DatePicker from '../../components/datePicker'
 import { DatePicker } from 'date-picker-nextjs'
-import 'date-picker-nextjs/dist/components/Datepicker.css'
+
 import Layout, { siteTitle } from '../../components/layout'
 import utilStyles from '../../styles/utils.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -25,7 +25,8 @@ import departments from '../../data/departements.json'
 import states from '../../data/states.json'
 // import Modal from '../../components/modal'
 import { Modal } from 'modal-nextjs'
-import 'modal-nextjs/dist/components/Modal.css'
+// import 'modal-nextjs/dist/components/Modal.css'
+
 export default function CreateEmployees() {
   const dispatch = useDispatch()
   const employeeList = useSelector((state) => state.employeeList.data)
