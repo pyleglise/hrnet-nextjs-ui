@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { Modal } from 'modal-nextjs'
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -17,8 +18,6 @@ import EmployeesTable from '../../components/employeesTable'
 
 import EmployeesCards from '../../components/employeesCards'
 import EmployeeCard from '../../components/employeeCard'
-// import Modal from '../../components/modal'
-import { Modal } from 'modal-nextjs'
 
 export async function getStaticProps() {
   let data = {}

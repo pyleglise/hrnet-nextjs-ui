@@ -1,7 +1,6 @@
 import Head from 'next/head'
-// import DatePicker from '../../components/datePicker'
 import { DatePicker } from 'date-picker-nextjs'
-
+import { Modal } from 'modal-nextjs'
 import Layout, { siteTitle } from '../../components/layout'
 import utilStyles from '../../styles/utils.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -23,9 +22,6 @@ import { setEmployeeList } from '../../redux/reducers'
 import SelectMenu from '../../components/selectMenu'
 import departments from '../../data/departements.json'
 import states from '../../data/states.json'
-// import Modal from '../../components/modal.js.old'
-import { Modal } from 'modal-nextjs'
-// import 'modal-nextjs/dist/components/Modal.css'
 
 export default function CreateEmployees() {
   const dispatch = useDispatch()
