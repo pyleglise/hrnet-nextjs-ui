@@ -39,7 +39,14 @@ export default function EmployeesTable({
 
   const indexOfLastUser = currentPage * usersPerPage
   const indexOfFirstUser = indexOfLastUser - usersPerPage
-  const currentUsers = sortedUsers.slice(indexOfFirstUser, indexOfLastUser)
+  const currentUsers =
+    Array.isArray(sortedUsers) &&
+    sortedUsers.slice(indexOfFirstUser, indexOfLastUser)
+  // if (Array.isArray(sortedUsers)) {
+  //   currentUsers = Array.isArray(sortedUsers) && sortedUsers.slice(indexOfFirstUser, indexOfLastUser)
+  // } else {
+  //   currentUsers = sortedUsers
+  // }
 
   useEffect(() => {
     setUsersPerPage(numberOfLines)
@@ -111,23 +118,24 @@ export default function EmployeesTable({
 function showTableRows(currentUsers, handleClick) {
   return (
     <>
-      {currentUsers.map((item, index) => (
-        <tr
-          className='table table-fixed w-full cursor-pointer hover:bg-bg-color-light hover:text-white'
-          id={index}
-          key={index}
-          onClick={() => handleClick(item)}
-        >
-          {tableProperties.map((propertyGroup, groupIndex) => (
-            <td
-              className='truncate'
-              key={groupIndex}
-            >
-              {item[propertyGroup[0]]}
-            </td>
-          ))}
-        </tr>
-      ))}
+      {Array.isArray(currentUsers) &&
+        currentUsers.map((item, index) => (
+          <tr
+            className='table table-fixed w-full cursor-pointer hover:bg-bg-color-light hover:text-white'
+            id={index}
+            key={index}
+            onClick={() => handleClick(item)}
+          >
+            {tableProperties.map((propertyGroup, groupIndex) => (
+              <td
+                className='truncate'
+                key={groupIndex}
+              >
+                {item[propertyGroup[0]]}
+              </td>
+            ))}
+          </tr>
+        ))}
     </>
   )
 }

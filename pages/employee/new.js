@@ -1,6 +1,6 @@
 import Head from 'next/head'
-// import DatePicker from '../../components/datePicker'
-import { DatePicker } from 'date-picker-nextjs'
+import DatePicker from '../../components/datePicker'
+// import { DatePicker } from 'date-picker-nextjs'
 
 import Layout, { siteTitle } from '../../components/layout'
 import utilStyles from '../../styles/utils.module.scss'
@@ -23,8 +23,8 @@ import { setEmployeeList } from '../../redux/reducers'
 import SelectMenu from '../../components/selectMenu'
 import departments from '../../data/departements.json'
 import states from '../../data/states.json'
-// import Modal from '../../components/modal'
-import { Modal } from 'modal-nextjs'
+import Modal from '../../components/modal'
+// import { Modal } from 'modal-nextjs'
 // import 'modal-nextjs/dist/components/Modal.css'
 
 export default function CreateEmployees() {

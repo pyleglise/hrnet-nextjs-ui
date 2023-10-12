@@ -2,7 +2,7 @@ import { faClose } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import utilStyles from '../styles/utils.module.scss'
 
-export default function Modal({ setModalIsOpen, content }) {
+const Modal = ({ setModalIsOpen, content }) => {
   const handleClose = () => {
     setModalIsOpen(false)
   }
@@ -29,3 +29,4 @@ export default function Modal({ setModalIsOpen, content }) {
     </div>
   )
 }
+export default Modal
