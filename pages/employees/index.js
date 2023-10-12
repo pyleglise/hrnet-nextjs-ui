@@ -17,7 +17,8 @@ import EmployeesTable from '../../components/employeesTable'
 
 import EmployeesCards from '../../components/employeesCards'
 import EmployeeCard from '../../components/employeeCard'
-import Modal from '../../components/modal'
+// import Modal from '../../components/modal'
+import { Modal } from 'modal-nextjs'
 
 export async function getStaticProps() {
   let data = {}
@@ -40,31 +41,27 @@ export default function ShowEmployees({ data }) {
   const [userToOpen, setUserToOpen] = useState({})
 
   useEffect(() => {
-    dataState.length === 0 && data && dispatch(setEmployeeList({ data }))
+    if (!Array.isArray(dataState)) {
+      dispatch(setEmployeeList([]))
+    } else {
+      dataState.length === 0 && data && dispatch(setEmployeeList({ data }))
+    }
   }, [data])
 
   useEffect(() => {
-    const filteredEmployees =
-      Array.isArray(dataState) &&
-      dataState.filter((employee) => {
-        return (
-          employee.firstName
-            ?.toLowerCase()
-            .includes(searchTerm.toLowerCase()) ||
-          employee.lastName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          employee.startDate
-            ?.toLowerCase()
-            .includes(searchTerm.toLowerCase()) ||
-          employee.department
-            ?.toLowerCase()
-            .includes(searchTerm.toLowerCase()) ||
-          employee.street?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          employee.city?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          employee.state?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          employee.zipCode?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          employee.dateOfBirth?.toLowerCase().includes(searchTerm.toLowerCase())
-        )
-      })
+    const filteredEmployees = dataState.filter((employee) => {
+      return (
+        employee.firstName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.lastName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.startDate?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.department?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.street?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.city?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.state?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.zipCode?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        employee.dateOfBirth?.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    })
     setFilteredData(filteredEmployees)
   }, [searchTerm, dataState])
 
@@ -125,7 +122,7 @@ function showDataZone(
     <div className='flex flex-col justify-between text-left overflow-hidden mb-2 '>
       {isList ? (
         <EmployeesTable
-          dataState={dataState}
+          dataState={Array.isArray(dataState) ? dataState : []}
           numberOfLines={numberOfLines}
           setModalIsOpen={setModalIsOpen}
           setUserToOpen={setUserToOpen}
