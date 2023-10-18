@@ -48,19 +48,27 @@ export default function ShowEmployees({ data }) {
   }, [data])
 
   useEffect(() => {
-    const filteredEmployees = dataState.filter((employee) => {
-      return (
-        employee.firstName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.lastName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.startDate?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.department?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.street?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.city?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.state?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.zipCode?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.dateOfBirth?.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    })
+    const filteredEmployees =
+      Array.isArray(dataState) &&
+      dataState.filter((employee) => {
+        return (
+          employee.firstName
+            ?.toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+          employee.lastName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          employee.startDate
+            ?.toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+          employee.department
+            ?.toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+          employee.street?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          employee.city?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          employee.state?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          employee.zipCode?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          employee.dateOfBirth?.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      })
     setFilteredData(filteredEmployees)
   }, [searchTerm, dataState])
 
