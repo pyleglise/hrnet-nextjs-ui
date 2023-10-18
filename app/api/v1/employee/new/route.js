@@ -1,5 +1,5 @@
-const dynamic = 'force-dynamic'
-const revalidate = 0
+// const dynamic = 'force-dynamic'
+// const revalidate = 0
 import fsPromises from 'fs/promises'
 import fs from 'fs'
 import path from 'path'
