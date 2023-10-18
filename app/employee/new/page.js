@@ -83,8 +83,9 @@ export default function CreateEmployees() {
 
   async function fieldsValidation(newUserData) {
     if (
-      Object.keys(newUserData).length !== 0 &&
-      (!newUserData?.firstName || !newUserData?.lastName)
+      Object.keys(newUserData).length === 0 ||
+      !newUserData?.firstName ||
+      !newUserData?.lastName
     ) {
       setErrorMessage('You must enter at least a first name and a last name !')
       return false
@@ -99,11 +100,11 @@ export default function CreateEmployees() {
     const userExists = data.find(
       (user) =>
         user.firstName === newUserData.firstName &&
-        user.lastName === newUserData.lastName,
+        user.lastName === newUserData.lastName
     )
     if (userExists) {
       setErrorMessage(
-        'An employee with this first name and last name already exists !',
+        'An employee with this first name and last name already exists !'
       )
       return false
     }
@@ -133,9 +134,9 @@ export default function CreateEmployees() {
       setSelectedState('')
       dispatch(setEmployeeList({ data }))
       setNewUserData({})
+      setModalIsOpen(true)
     }
     setLoading(false)
-    setModalIsOpen(true)
   }
 
   const handleDatePicker = (e) => {
@@ -146,93 +147,89 @@ export default function CreateEmployees() {
 
   const showCreationForm = (handleChange, handleDatePicker) => {
     return (
-      <form
-        action='#'
-        id='createEmployee'
-        className='flex flex-wrap '
-      >
-        <fieldset className='fieldset-container'>
+      <form action="#" id="createEmployee" className="flex flex-wrap ">
+        <fieldset className="fieldset-container">
           <legend>Identity</legend>
-          <fieldset className='w-full'>
-            <div className='input-container'>
+          <fieldset className="w-full">
+            <div className="input-container">
               <input
-                className='input-field outline-none'
-                type='text'
-                id='firstName'
-                placeholder='First Name'
+                className="input-field outline-none"
+                type="text"
+                id="firstName"
+                placeholder="First Name"
                 autoFocus
                 onChange={handleChange}
                 required
               />
-              <div className='input-icon'>
+              <div className="input-icon">
                 <FontAwesomeIcon icon={faUserReg} />
               </div>
             </div>
           </fieldset>
-          <fieldset className='w-full'>
-            <div className='input-container'>
+          <fieldset className="w-full">
+            <div className="input-container">
               <input
-                className='input-field outline-none'
-                type='text'
-                id='lastName'
-                placeholder='Last Name'
+                className="input-field outline-none"
+                type="text"
+                id="lastName"
+                placeholder="Last Name"
                 onChange={handleChange}
                 required
               />
-              <div className='block absolute top-1 left-2 '>
+              <div className="block absolute top-1 left-2 ">
                 <FontAwesomeIcon icon={faUser} />
               </div>
             </div>
           </fieldset>
-          <fieldset className='w-full'>
-            <div className='input-container'>
+          <fieldset className="w-full">
+            <div className="input-container">
               <input
-                className='input-field outline-none'
-                type='text'
-                id='dateOfBirth'
-                placeholder='Date of birth'
+                className="input-field outline-none"
+                type="text"
+                id="dateOfBirth"
+                placeholder="Date of birth"
                 onClick={handleDatePicker}
               />
-              <div className='input-icon'>
+              <div className="input-icon">
                 <FontAwesomeIcon icon={faBaby} />
               </div>
             </div>
           </fieldset>
         </fieldset>
 
-        <fieldset className='fieldset-container border border-solid border-primary-color rounded-lg'>
+        <fieldset className="fieldset-container border border-solid border-primary-color rounded-lg">
           <legend>Address</legend>
 
-          <fieldset className='w-full'>
-            <div className='input-container'>
+          <fieldset className="w-full">
+            <div className="input-container">
               <input
-                className='input-field outline-none'
-                type='text'
-                id='street'
-                placeholder='Street'
+                className="input-field outline-none"
+                type="text"
+                id="street"
+                placeholder="Street"
                 onChange={handleChange}
               />
-              <div className='input-icon'>
+              <div className="input-icon">
                 <FontAwesomeIcon icon={faRoad} />
               </div>
             </div>
           </fieldset>
-          <fieldset className='w-full'>
-            <div className='input-container'>
+          <fieldset className="w-full">
+            <div className="input-container">
               <input
-                className='input-field outline-none'
-                type='text'
-                id='city'
-                placeholder='City'
+                className="input-field outline-none"
+                type="text"
+                id="city"
+                placeholder="City"
                 onChange={handleChange}
               />
-              <div className='input-icon'>
+              <div className="input-icon">
                 <FontAwesomeIcon icon={faCity} />
               </div>
             </div>
           </fieldset>
-          <fieldset className='w-full'>
-            <div className='input-container'>
+          <fieldset className="w-full">
+            <div className="input-container">
               <SelectMenu
                 arrayOfdata={statesNames}
                 iconFa={'faFlagUsa'}
@@ -243,41 +240,41 @@ export default function CreateEmployees() {
             </div>
           </fieldset>
 
-          <fieldset className='w-full'>
-            <div className='input-container'>
+          <fieldset className="w-full">
+            <div className="input-container">
               <input
-                className='input-field outline-none'
-                type='text'
-                id='zipCode'
-                placeholder='Zip Code'
+                className="input-field outline-none"
+                type="text"
+                id="zipCode"
+                placeholder="Zip Code"
                 onChange={handleChange}
               />
-              <div className='input-icon'>
+              <div className="input-icon">
                 <FontAwesomeIcon icon={faEnvelope} />
               </div>
             </div>
           </fieldset>
         </fieldset>
-        <fieldset className='fieldset-container'>
+        <fieldset className="fieldset-container">
           <legend>Employee</legend>
-          <fieldset className='w-full'>
-            <div className='input-container'>
+          <fieldset className="w-full">
+            <div className="input-container">
               <input
-                className='input-field outline-none'
-                type='text'
-                id='startDate'
-                placeholder='Start date'
+                className="input-field outline-none"
+                type="text"
+                id="startDate"
+                placeholder="Start date"
                 onChange={handleChange}
                 onClick={handleDatePicker}
               />
-              <div className='input-icon'>
+              <div className="input-icon">
                 <FontAwesomeIcon icon={faPlay} />
               </div>
             </div>
           </fieldset>
 
-          <fieldset className='w-full'>
-            <div className='input-container'>
+          <fieldset className="w-full">
+            <div className="input-container">
               <SelectMenu
                 arrayOfdata={departments}
                 iconFa={'faBuildingUser'}
@@ -294,21 +291,18 @@ export default function CreateEmployees() {
 
   return (
     <>
-      <section className='w-full h-full '>
-        <h1 className='text-2xl my-1 text-secondary-color'>Add new Employee</h1>
-        <article className='flex justify-center '>
-          <div className='form-container mb-4'>
+      <section className="w-full h-full ">
+        <h1 className="text-2xl my-1 text-secondary-color">Add new Employee</h1>
+        <article className="flex justify-center ">
+          <div className="form-container mb-4">
             {showCreationForm(handleChange, handleDatePicker)}
             {errorMessage && (
-              <p className='text-red-600 font-bold text-lg text-center mb-3'>
+              <p className="text-red-600 font-bold text-lg text-center mb-3">
                 {errorMessage}
               </p>
             )}
 
-            <button
-              className={utilStyles['button']}
-              onClick={handleSave}
-            >
+            <button className={utilStyles['button']} onClick={handleSave}>
               {isLoading ? <FontAwesomeIcon icon={faSpinner} /> : 'Save'}
             </button>
           </div>
@@ -318,7 +312,7 @@ export default function CreateEmployees() {
         <Modal
           setModalIsOpen={setModalIsOpen}
           content={
-            <p className='p-8 bg-white rounded'>Employee saved succeffully</p>
+            <p className="p-8 bg-white rounded">Employee saved succeffully</p>
           }
         />
       )}
@@ -328,6 +322,6 @@ export default function CreateEmployees() {
           clickedInput={clickedInput}
         />
       )}
-   </>
+    </>
   )
 }
