@@ -15,21 +15,22 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 
 export default function ShowEmployeesMain({ data }) {
+  
   const dispatch = useDispatch()
   const { data: dataState } = useSelector((state) => state.employeeList)
   const [isList, setIsList] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
   const [numberOfLines, setNumberOfLines] = useState(30)
-  const [filteredData, setFilteredData] = useState(data)
+  const [filteredData, setFilteredData] = useState(data|[])
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [userToOpen, setUserToOpen] = useState({})
-
+ 
   useEffect(() => {
-    if (!Array.isArray(dataState)) {
-      dispatch(setEmployeeList([]))
-    } else {
-      dataState?.length === 0 && data && dispatch(setEmployeeList({ data }))
-    }
+    // if (!Array.isArray(dataState)) {
+    //   dispatch(setEmployeeList([]))
+    // } else {
+      dataState.length === 0 && data && dispatch(setEmployeeList({data}))
+    // }
   }, [data])
 
   useEffect(() => {
