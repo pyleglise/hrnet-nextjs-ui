@@ -28,7 +28,7 @@ export default function ShowEmployeesMain({ data }) {
     if (!Array.isArray(dataState)) {
       dispatch(setEmployeeList([]))
     } else {
-      dataState.length === 0 && data && dispatch(setEmployeeList({ data }))
+      dataState?.length === 0 && data && dispatch(setEmployeeList({ data }))
     }
   }, [data])
 
