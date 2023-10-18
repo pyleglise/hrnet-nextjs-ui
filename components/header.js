@@ -1,7 +1,10 @@
+
+'use client'
 import Link from 'next/link'
 import Image from 'next/image'
 import logo100 from '../public/images/main-logo-100.webp'
 import Menu from './menu'
+import { usePathname } from 'next/navigation'
 
 const showNoMenuHeader = (
   <div className='py-4 mx-4'>
@@ -10,18 +13,20 @@ const showNoMenuHeader = (
     </p>
   </div>
 )
-export default function Header({ home, showEmployees, createEmployee }) {
+export default function Header() {
+  const pathname=usePathname()
+  const home=pathname==='/'
   return (
     <header>
       <nav className='flex m-4 place-content-center'>
         {home
           ? showNoMenuHeader
-          : showMenuHeader(showEmployees, createEmployee)}
+          : showMenuHeader()}
       </nav>
     </header>
   )
 }
-function showMenuHeader(showEmployees, createEmployee) {
+function showMenuHeader() {
   return (
     <>
       <Link
@@ -36,10 +41,7 @@ function showMenuHeader(showEmployees, createEmployee) {
       </Link>
 
       <div className='flex justify-end w-full'>
-        <Menu
-          showEmployees={showEmployees}
-          createEmployee={createEmployee}
-        />
+        <Menu />
       </div>
     </>
   )

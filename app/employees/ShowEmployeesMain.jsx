@@ -1,7 +1,12 @@
-import Head from 'next/head'
+'use client'
+
 import { Modal } from 'modal-nextjs'
 import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import { setEmployeeList } from '../../redux/reducers'
+import EmployeeCard from '../../components/employeeCard'
+import EmployeesTable from '../../components/employeesTable'
+import EmployeesCards from '../../components/employeesCards'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faSearch,
@@ -9,27 +14,7 @@ import {
   faTableList,
 } from '@fortawesome/free-solid-svg-icons'
 
-import Layout, { siteTitle } from '../../components/layout'
-import { listEmployees } from '../../lib/employees'
-
-import { setEmployeeList } from '../../redux/reducers'
-
-import EmployeesTable from '../../components/employeesTable'
-
-import EmployeesCards from '../../components/employeesCards'
-import EmployeeCard from '../../components/employeeCard'
-
-export async function getStaticProps() {
-  let data = {}
-  let error = ''
-  try {
-    data = await listEmployees()
-  } catch (e) {
-    error = e.toString()
-  }
-  return { props: { data, error } }
-}
-export default function ShowEmployees({ data }) {
+export default function ShowEmployeesMain({ data }) {
   const dispatch = useDispatch()
   const { data: dataState } = useSelector((state) => state.employeeList)
   const [isList, setIsList] = useState(true)
@@ -89,10 +74,7 @@ export default function ShowEmployees({ data }) {
   }
 
   return (
-    <Layout showEmployees={true}>
-      <Head>
-        <title>{siteTitle + ' - Employees list'}</title>
-      </Head>
+    <>
       <section className='w-full h-full'>
         {showTitle(
           isList,
@@ -115,7 +97,7 @@ export default function ShowEmployees({ data }) {
           content={<EmployeeCard item={userToOpen} />}
         />
       )}
-    </Layout>
+</>
   )
 }
 function showDataZone(

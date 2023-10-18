@@ -1,8 +1,9 @@
-import Head from 'next/head'
+'use client'
+// import Head from 'next/head'
 import { DatePicker } from 'date-picker-nextjs'
 import { Modal } from 'modal-nextjs'
-import Layout, { siteTitle } from '../../components/layout'
-import utilStyles from '../../styles/utils.module.scss'
+// import Layout, { siteTitle } from '../../components/layout'
+import utilStyles from '../../../styles/utils.module.scss'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser as faUserReg } from '@fortawesome/free-regular-svg-icons'
 import {
@@ -15,13 +16,13 @@ import {
   faSpinner,
 } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from 'react'
-import { addEmployee, listEmployees } from '../../lib/employees'
+import { addEmployee, listEmployees } from '../../../lib/employees'
 import { useDispatch, useSelector } from 'react-redux'
-import { setEmployeeList } from '../../redux/reducers'
+import { setEmployeeList } from '../../../redux/reducers'
 
-import SelectMenu from '../../components/selectMenu'
-import departments from '../../data/departements.json'
-import states from '../../data/states.json'
+import SelectMenu from '../../../components/selectMenu'
+import departments from '../../../data/departements.json'
+import states from '../../../data/states.json'
 
 export default function CreateEmployees() {
   const dispatch = useDispatch()
@@ -292,10 +293,7 @@ export default function CreateEmployees() {
   }
 
   return (
-    <Layout createEmployee={true}>
-      <Head>
-        <title>{siteTitle + ' - New employee'}</title>
-      </Head>
+    <>
       <section className='w-full h-full '>
         <h1 className='text-2xl my-1 text-secondary-color'>Add new Employee</h1>
         <article className='flex justify-center '>
@@ -330,6 +328,6 @@ export default function CreateEmployees() {
           clickedInput={clickedInput}
         />
       )}
-    </Layout>
+   </>
   )
 }

@@ -17,6 +17,9 @@
 
 # misc
 .DS_Store
+.vscode
+.eslintrc.cjs
+.prettierrc
 
 # debug
 npm-debug.log*
