@@ -13,7 +13,7 @@ const tmpFilePath = '/tmp/_mockedEmployeesList.json'
 export async function GET(request) {
   const { searchParams } = new URL(request.url)
   const id = searchParams.get('id')
-  // console.log('requete GET', request)
+
   if (fs.existsSync(tmpFilePath)) {
     dataFilePath = tmpFilePath
   }
@@ -24,14 +24,11 @@ export async function GET(request) {
     let objectData = JSON.parse(jsonData)
 
     objectData = sortEmployees(objectData)
-    return Response.json({ message: objectData, status: 200 })
+    return Response.json({ data: objectData, status: 200 })
   } catch (error) {
-    // console.error(error)
-    // Send an error response
-    return Response.json({
-      message: 'Error reading data : ' + error,
-      error,
+    return new Response(null, {
       status: 500,
+      statusText: error,
     })
   }
 }
