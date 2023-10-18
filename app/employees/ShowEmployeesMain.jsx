@@ -69,7 +69,7 @@ export default function ShowEmployeesMain({ data }) {
     document.getElementById('searchfield').value = ''
     setFilteredData(dataState)
     e.target.value === 'all'
-      ? setNumberOfLines(dataState.length)
+      ? setNumberOfLines(dataState?.length)
       : setNumberOfLines(e.target.value)
   }
 
@@ -136,8 +136,8 @@ function showTitle(
         <h1 className='grow text-lg xl:text-2xl my-1 text-secondary-color '>
           Employees list{' '}
           <span className='xl:text-lg text-base'>
-            ({filteredData.length} result
-            {filteredData.length > 1 ? 's' : ''})
+            ({filteredData?.length} result
+            {filteredData?.length > 1 ? 's' : ''})
           </span>
         </h1>
         {isList ? (
