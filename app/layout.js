@@ -13,6 +13,7 @@ export const metadata = {
   referrer: 'origin-when-cross-origin',
   keywords: ['Human resources', 'Management', 'HR'],
   authors: [{ name: 'Pierre-Yves Léglise', url: 'contact@axialdata.net' }],
+  themeColor: '#3a33a4',
   colorScheme: 'light',
   creator: 'Pierre-Yves Léglise',
   publisher: 'Pierre-Yves Léglise',
