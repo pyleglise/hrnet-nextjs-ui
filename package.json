@@ -1,7 +1,7 @@
 {
   "name": "hrnet-nextjs-ui",
   "private": true,
-  "version": "0.6.0",
+  "version": "0.7.0",
   "license": "BSD-3-Clause",
   "description": "HR-Net project - P14 openClassrooms",
   "author": "Pierre-Yves Léglise - axialdata",

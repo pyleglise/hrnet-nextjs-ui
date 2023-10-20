@@ -15,7 +15,7 @@ export default function manifest() {
         src: '/favicon.ico',
         sizes: 'any',
         type: 'image/x-icon',
-        purpose: 'any',
+        purpose: '48x48',
       },
       {
         src: '/icons-192.png',

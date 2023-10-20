@@ -23,7 +23,11 @@ import { setEmployeeList } from '../../../redux/reducers'
 import SelectMenu from '../../../components/selectMenu'
 import departments from '../../../data/departements.json'
 import states from '../../../data/states.json'
-
+// export const metadata = {
+//   title: 'HR-Net - New employee',
+//   description:
+//     'HR-Net - New employee - Employee database manager - version app-router',
+// }
 export default function CreateEmployees() {
   const dispatch = useDispatch()
   const employeeList = useSelector((state) => state.employeeList.data)
