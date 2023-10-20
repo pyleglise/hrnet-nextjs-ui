@@ -39,7 +39,15 @@ export default function EmployeesTable({
 
   const indexOfLastUser = currentPage * usersPerPage
   const indexOfFirstUser = indexOfLastUser - usersPerPage
-  const currentUsers = sortedUsers.slice(indexOfFirstUser, indexOfLastUser)
+  !Array.isArray(sortedUsers) && console.log(sortedUsers)
+  const currentUsers = Array.isArray(sortedUsers)
+    ? sortedUsers.slice(indexOfFirstUser, indexOfLastUser)
+    : sortedUsers
+  // if (Array.isArray(sortedUsers)) {
+  //   currentUsers = Array.isArray(sortedUsers) && sortedUsers.slice(indexOfFirstUser, indexOfLastUser)
+  // } else {
+  //   currentUsers = sortedUsers
+  // }
 
   useEffect(() => {
     setUsersPerPage(numberOfLines)

@@ -1,5 +1,6 @@
-const { version } = require('../package.json')
-export default function Footer() {
+import pkg from '../package.json'
+const Footer = () => {
+  const { version } = pkg
   return (
     <footer className='flex py-4 mx-4 place-content-center'>
       <p className='place-content-center text-bg-color-xlight'>
@@ -8,3 +9,4 @@ export default function Footer() {
     </footer>
   )
 }
+export default Footer

@@ -1,60 +1,60 @@
-import Head from 'next/head'
-import Layout, { siteTitle } from '../../components/layout'
-import { listEmployees } from '../../lib/employees'
+'use client'
+
+import { Modal } from 'modal-nextjs'
+import { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { setEmployeeList } from '../../redux/reducers'
-import { useEffect, useState } from 'react'
+import EmployeeCard from '../../components/employeeCard'
 import EmployeesTable from '../../components/employeesTable'
+import EmployeesCards from '../../components/employeesCards'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
   faSearch,
   faTable,
   faTableList,
 } from '@fortawesome/free-solid-svg-icons'
-import EmployeesCards from '../../components/employeesCards'
-import EmployeeCard from '../../components/employeeCard'
-// import Modal from '../../components/modal'
-import { Modal } from 'modal-nextjs'
-import 'modal-nextjs/dist/components/Modal.css'
 
-export async function getStaticProps() {
-  let data = {}
-  let error = ''
-  try {
-    data = await listEmployees()
-  } catch (e) {
-    error = e.toString()
-  }
-  return { props: { data, error } }
-}
-export default function ShowEmployees({ data }) {
+export default function ShowEmployeesMain({ data }) {
+  
   const dispatch = useDispatch()
   const { data: dataState } = useSelector((state) => state.employeeList)
   const [isList, setIsList] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
   const [numberOfLines, setNumberOfLines] = useState(30)
-  const [filteredData, setFilteredData] = useState(data)
+  const [filteredData, setFilteredData] = useState(data|[])
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [userToOpen, setUserToOpen] = useState({})
-
+ 
   useEffect(() => {
-    dataState.length === 0 && data && dispatch(setEmployeeList({ data }))
+    // if (!Array.isArray(dataState)) {
+    //   dispatch(setEmployeeList([]))
+    // } else {
+      dataState.length === 0 && data && dispatch(setEmployeeList({data}))
+    // }
   }, [data])
 
   useEffect(() => {
-    const filteredEmployees = dataState.filter((employee) => {
-      return (
-        employee.firstName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.lastName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.startDate?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.department?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.street?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.city?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.state?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.zipCode?.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        employee.dateOfBirth?.toLowerCase().includes(searchTerm.toLowerCase())
-      )
-    })
+    const filteredEmployees =
+      Array.isArray(dataState) &&
+      dataState.filter((employee) => {
+        return (
+          employee.firstName
+            ?.toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+          employee.lastName?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          employee.startDate
+            ?.toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+          employee.department
+            ?.toLowerCase()
+            .includes(searchTerm.toLowerCase()) ||
+          employee.street?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          employee.city?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          employee.state?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          employee.zipCode?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          employee.dateOfBirth?.toLowerCase().includes(searchTerm.toLowerCase())
+        )
+      })
     setFilteredData(filteredEmployees)
   }, [searchTerm, dataState])
 
@@ -75,10 +75,7 @@ export default function ShowEmployees({ data }) {
   }
 
   return (
-    <Layout showEmployees={true}>
-      <Head>
-        <title>{siteTitle + ' - Employees list'}</title>
-      </Head>
+    <>
       <section className='w-full h-full'>
         {showTitle(
           isList,
@@ -101,7 +98,7 @@ export default function ShowEmployees({ data }) {
           content={<EmployeeCard item={userToOpen} />}
         />
       )}
-    </Layout>
+</>
   )
 }
 function showDataZone(
@@ -115,7 +112,7 @@ function showDataZone(
     <div className='flex flex-col justify-between text-left overflow-hidden mb-2 '>
       {isList ? (
         <EmployeesTable
-          dataState={dataState}
+          dataState={Array.isArray(dataState) ? dataState : []}
           numberOfLines={numberOfLines}
           setModalIsOpen={setModalIsOpen}
           setUserToOpen={setUserToOpen}
