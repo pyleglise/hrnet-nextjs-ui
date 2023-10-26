@@ -51,7 +51,7 @@ Le front-end sera lancé à l'URL:
 
 [Site Démo](https://hrnet.axialdata.app/)
 
-[Documentation](https://hrnet.axialdata.app/) 
+[Documentation](https://pyleglise.github.io/hrnet-nextjs-ui/) 
 
 ---
 
