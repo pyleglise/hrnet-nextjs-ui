@@ -30,8 +30,6 @@ export const metadata = {
   referrer: 'origin-when-cross-origin',
   keywords: ['Human resources', 'Management', 'HR'],
   authors: [{ name: 'Pierre-Yves Léglise', url: 'contact@axialdata.net' }],
-  themeColor: '#3a33a4',
-  colorScheme: 'light',
   creator: 'Pierre-Yves Léglise',
   publisher: 'Pierre-Yves Léglise',
   formatDetection: {
@@ -41,6 +39,10 @@ export const metadata = {
   },
   title: 'HR-Net - App',
   description: 'HR-Net - Employee database manager - version app-router',
+}
+export const viewport = {
+  themeColor: '#3a33a4',
+  colorScheme: 'light',
 }
 
 // Importing DM Sans font from Next.js Google font package
