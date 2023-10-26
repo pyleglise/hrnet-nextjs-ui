@@ -1,7 +1,7 @@
 {
   "name": "hrnet-nextjs-ui",
   "private": true,
-  "version": "0.6.0",
+  "version": "0.7.0",
   "license": "BSD-3-Clause",
   "description": "HR-Net project - P14 openClassrooms",
   "author": "Pierre-Yves Léglise - axialdata",
@@ -17,6 +17,7 @@
     "next.js"
   ],
   "scripts": {
+    "docs": "rd /s /q docs .cache>nul 2>&1|echo.>nul && jsdoc -c jsdoc.conf.json && node custom-docs.mjs",
     "build": "next build",
     "dev": "rmdir .next /q /s &&  next dev",
     "start": "next start"
@@ -47,6 +48,9 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.15",
+    "clean-jsdoc-theme": "^4.2.14",
+    "jsdoc": "^4.0.2",
+    "jsdoc-babel": "^0.5.0",
     "postcss": "^8.4.29",
     "tailwindcss": "^3.3.3"
   }

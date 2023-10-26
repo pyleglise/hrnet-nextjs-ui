@@ -1,0 +1,60 @@
+{
+  "plugins": ["plugins/markdown", "node_modules/jsdoc-babel"],
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc", "closure"]
+  },
+  "source": {
+    "include": ["app", "lib", "components"],
+    "includePattern": ".js(doc|x)?$",
+    "excludePattern": "(node_modules/|docs)",
+    "exclude": ["node_modules", "docs"]
+  },
+
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false
+  },
+  "babel": {
+    "extensions": ["tsx"],
+    "ignore": ["**/*.(test|spec).ts"],
+    "babelrc": false,
+    "presets": [
+      ["@babel/preset-env", { "targets": { "node": true } }],
+      "@babel/preset-typescript"
+    ],
+    "plugins": [
+      "@babel/proposal-class-properties",
+      "@babel/proposal-object-rest-spread"
+    ]
+  },
+  "opts": {
+    "destination": "docs",
+    "search": true,
+    "recurse": true,
+    "verbose": true,
+    "readme": "README.md",
+    "template": "node_modules/clean-jsdoc-theme",
+    "theme_opts": {
+      "default_theme": "dark",
+      "title": "HRNet UI developper Documentation",
+      "homepageTitle": "HRNet UI developper documentation",
+      "footer": "Project 14 of OpenClassrooms path JavaScript React Developer - Pierre-Yves Léglise - 2023",
+      "static_dir": ["public/favicon.ico"],
+      "favicon": "public/favicon.ico",
+      "includeFilesListInHomepage": true,
+      "menu": [
+        {
+          "title": "Source",
+          "link": "https://github.com/pyleglise/hrnet-nextjs-ui",
+          "target": "_blank"
+        }
+      ]
+    },
+    "displayModuleHeader": true
+  },
+  "markdown": {
+    "hardwrap": false,
+    "idInHeadings": true
+  }
+}

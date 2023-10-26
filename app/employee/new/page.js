@@ -23,8 +23,18 @@ import { setEmployeeList } from '../../../redux/reducers'
 import SelectMenu from '../../../components/selectMenu'
 import departments from '../../../data/departements.json'
 import states from '../../../data/states.json'
-
-export default function CreateEmployees() {
+// export const metadata = {
+//   title: 'HR-Net - New employee',
+//   description:
+//     'HR-Net - New employee - Employee database manager - version app-router',
+// }
+/**
+ * Component to display the form to create a new employee.
+ *
+ * @namespace
+ * @returns {ReactElement} The rendered CreateEmployees component.
+ */
+function CreateEmployees() {
   const dispatch = useDispatch()
   const employeeList = useSelector((state) => state.employeeList.data)
   const [newUserData, setNewUserData] = useState({})
@@ -81,6 +91,12 @@ export default function CreateEmployees() {
       })
   }, [selectedState])
 
+  /**
+   * Validate if the fields have correctly been filled.
+   *
+   * @param {Object} newUserData - All the fields to be validated
+   * @returns {Boolean} - Fields are validated or not
+   */
   async function fieldsValidation(newUserData) {
     if (
       Object.keys(newUserData).length === 0 ||
@@ -145,6 +161,12 @@ export default function CreateEmployees() {
     setModalDateIsOpen(true)
   }
 
+  /**
+   * Function to display the form .
+   *
+   * @function
+   * @returns {ReactElement} The rendered CreateEmployees form.
+   */
   const showCreationForm = (handleChange, handleDatePicker) => {
     return (
       <form action="#" id="createEmployee" className="flex flex-wrap ">
@@ -325,3 +347,4 @@ export default function CreateEmployees() {
     </>
   )
 }
+export default CreateEmployees

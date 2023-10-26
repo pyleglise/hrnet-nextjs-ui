@@ -10,6 +10,13 @@ let dataFilePath = path.join(
   '_mockedData/_mockedEmployeesList.json'
 )
 const tmpFilePath = '/tmp/_mockedEmployeesList.json'
+
+/**
+ * Send a get request
+ *
+ * @param {Object} request - Data to get
+ * @returns {Object} - Response from API
+ */
 export async function GET(request) {
   const { searchParams } = new URL(request.url)
   const id = searchParams.get('id')

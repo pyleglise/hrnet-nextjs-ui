@@ -14,7 +14,14 @@ import {
   faTableList,
 } from '@fortawesome/free-solid-svg-icons'
 
-export default function ShowEmployeesMain({ data }) {
+/**
+ * Main component to display the list of employees.
+ * @namespace
+ * @param {Object} props - Component properties.
+ * @param {Array} props.data - Array of employee data.
+ * @returns {ReactElement} Rendered component.
+ */
+function ShowEmployeesMain({ data }) {
   
   const dispatch = useDispatch()
   const { data: dataState } = useSelector((state) => state.employeeList)
@@ -101,6 +108,17 @@ export default function ShowEmployeesMain({ data }) {
 </>
   )
 }
+
+/**
+ * Function to display the data zone.
+ * 
+ * @param {boolean} isList - Boolean to determine if the view mode is list.
+ * @param {Array} dataState - Data to be displayed.
+ * @param {number} numberOfLines - Number of lines to display.
+ * @param {Function} setModalIsOpen - Setter for modal open state.
+ * @param {Function} setUserToOpen - Setter for the user to open in modal.
+ * @returns {ReactElement} Rendered component.
+ */
 function showDataZone(
   isList,
   dataState,
@@ -124,6 +142,16 @@ function showDataZone(
   )
 }
 
+/**
+ * Function to display the title.
+ * 
+ * @param {boolean} isList - Boolean to determine if the view mode is list.
+ * @param {Function} handleToggleList - Handler for toggling list view.
+ * @param {Function} handleSearchChange - Handler for search change.
+ * @param {Array} filteredData - Filtered data.
+ * @param {Function} handleChangeNbOfLines - Handler to change number of lines.
+ * @returns {ReactElement} Rendered component.
+ */
 function showTitle(
   isList,
   handleToggleList,
@@ -196,3 +224,5 @@ function showTitle(
     </>
   )
 }
+
+export default ShowEmployeesMain

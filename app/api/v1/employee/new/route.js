@@ -11,6 +11,12 @@ let dataFilePath = path.join(
 )
 const tmpFilePath = '/tmp/_mockedEmployeesList.json'
 
+/**
+ * Send a post request
+ *
+ * @param {Object} request - Data to post
+ * @returns {Object} - Response from API
+ */
 export async function POST(request) {
   const req = await request.json()
   if (fs.existsSync(tmpFilePath)) {
